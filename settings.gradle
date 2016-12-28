@@ -1,0 +1,4 @@
+rootProject.name = 'k2azkaban-job'
+include 'k2azkaban-job-common'
+include 'k2azkaban-job-jobs'
+

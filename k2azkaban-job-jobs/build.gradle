@@ -1,0 +1,7 @@
+apply plugin: 'java'
+
+task srcZip(type: Zip, dependsOn: build) {
+    classifier = 'src'
+    from sourceSets*.resources
+    from 'build/libs'
+}
