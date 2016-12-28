@@ -1,0 +1,21 @@
+{
+  "sourceTable": "TB_LGBD_SUPPLYINCHANNET",
+  "targetTable": "LG_SUPPLYINCHANNET",
+  "type": "full",
+  "flagColumn": "FLAG",
+  "history": {
+    "type": "zipper",
+    "BDMTable": "bdm_ldp_supplyInChanNet",
+    "HisTable": "fdm_ldp_supplyInChanNet_his"
+  },
+  "columnMappings": [
+    {"source": "ID", "target": "ID"},
+    {"source": "CODE", "target": "supplyNo"},
+    {"source": "NAME", "target": "supplyName"},
+    {"source": "SCC_ADMIN_AREA_ID", "target": "divisionID"},
+    {"source": "SUPPLYCOMID", "target": "supplyID"},
+    {"source": "LATITUDE", "target": "LATITUDE"},
+    {"source": "LONGITUDE", "target": "LONGITUDE"},
+    {"source": "ADDRESS_DETAIL", "target": "ADDRESS"}
+  ]
+}

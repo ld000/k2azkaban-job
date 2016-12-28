@@ -1,0 +1,27 @@
+{
+  "sourceTable": "TB_LGBD_SERVICEHISTORY",
+  "targetTable": "LG_SERVICEHISTORY",
+  "type": "add",
+  "sourceWhere": ["(FLAG = '1' OR FLAG = '5')"],
+  "flagColumn": "FLAG",
+  "history": {
+    "type": "zipper",
+    "BDMTable": "bdm_ldp_serviceHistory",
+    "HisTable": "fdm_ldp_serviceHistory_his"
+  },
+  "columnMappings": [
+    {"source": "ID", "target": "ID"},
+    {"source": "MSS_MACHINE_NUMBER", "target": "deviceNo"},
+    {"source": "REPAIR_DATE", "target": "SERVICETIME"},
+    {"source": "FORM_SN", "target": "ORDERNO"},
+    {"source": "SERV_MAN_NAME", "target": "SERVICEHUMAN"},
+    {"source": "CONTENT", "target": "SERVICEINFO"},
+    {"source": "ERROR_TYPE", "target": "ERRORTYPE"},
+    {"source": "SUPPLYCOMID", "target": "serviceNo"},
+    {"source": "SERVICE_ORDER_NO", "target": "serviceOrder"},
+    {"source": "SERV_TYPE_NO", "target": "serviceType"},
+    {"source": "WORK_SITU_NO", "target": "JOBWORKSTATE"},
+    {"source": "ENV_SITU_NO", "target": "ENVIRONMENTWORKSTATE"},
+    {"source": "SMS_SERV_CHAN_INFO_ID", "target": "chanInfoId"}
+  ]
+}
