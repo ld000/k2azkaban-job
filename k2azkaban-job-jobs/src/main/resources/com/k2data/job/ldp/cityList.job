@@ -1,0 +1,6 @@
+type=javaprocess
+java.class=com.k2data.job.ldp.CityListJob
+classpath=/home/ld000/azkaban/azkaban-exec-server-3.13.0-1-g6fdd0cc/projects/1.10/k2azkaban-job-1.0.jar
+seconds=11
+fail=false
+dependencies=gpsContrastKmx
