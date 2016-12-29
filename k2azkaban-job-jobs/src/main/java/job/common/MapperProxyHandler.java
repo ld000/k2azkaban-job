@@ -1,6 +1,6 @@
 package job.common;
 
-import com.k2data.job.exception.InternalException;
+import com.k2data.platform.exception.InternalException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 

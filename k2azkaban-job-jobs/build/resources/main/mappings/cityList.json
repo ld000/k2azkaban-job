@@ -1,0 +1,18 @@
+{
+  "sourceTable": "TB_LGBD_CITYLIST",
+  "targetTable": "LG_CITYLIST",
+  "type": "full",
+  "flagColumn": "FLAG",
+  "history": {
+    "type": "zipper",
+    "BDMTable": "BDM_LDP_CITYLIST",
+    "HisTable": "FDM_LDP_CITYLIST_HIS"
+  },
+  "columnMappings": [
+    {"source": "SCC_ADMIN_AREA_ID", "target": "ID"},
+    {"source": "PARENT_ID", "target": "parentId"},
+    {"source": "CODE", "target": "citycode"},
+    {"source": "SCC_ADMIN_AREA_NAME", "target": "cityName"},
+    {"source": "SORT_ORDER", "target": "sort"}
+  ]
+}

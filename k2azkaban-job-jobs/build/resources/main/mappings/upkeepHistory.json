@@ -1,0 +1,24 @@
+{
+  "sourceTable": "TB_LGBD_UPKEEPHISTORY",
+  "targetTable": "LG_UPKEEPHISTORY",
+  "type": "add",
+  "sourceWhere": ["(FLAG = '1' OR FLAG = '5')"],
+  "flagColumn": "FLAG",
+  "history": {
+    "type": "zipper",
+    "BDMTable": "bdm_ldp_upkeepHistory",
+    "HisTable": "fdm_ldp_upkeepHistory_his"
+  },
+  "columnMappings": [
+    {"source": "ID", "target": "ID"},
+    {"source": "MSS_MACHINE_NUMBER", "target": "deviceNo"},
+    {"source": "MAINTAIN_DATE", "target": "UPKEEPTIME"},
+    {"source": "FORM_SN", "target": "ORDERNO"},
+    {"source": "SUPPLYCOMID", "target": "supplyid"},
+    {"source": "MAINTAIN_DESC", "target": "UPKEEPINFO"},
+    {"source": "SORT_ORDER", "target": "UPKEEPTOTAL"},
+    {"source": "WORK_SITU_NO", "target": "JOBWORKSTATE"},
+    {"source": "ENV_SITU_NO", "target": "ENVIRONMENTWORKSTATE"},
+    {"source": "SERV_CHAN_INFO_ID", "target": "chanInfoId"}
+  ]
+}

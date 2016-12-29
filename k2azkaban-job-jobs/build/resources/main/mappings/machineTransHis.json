@@ -1,0 +1,30 @@
+{
+  "sourceTable": "TB_LGBD_MACHINETRANSHIS",
+  "targetTable": "LG_MACHINETRANSPORTHISTORY",
+  "type": "full",
+  "flagColumn": "FLAG",
+  "history": {
+    "type": "zipper",
+    "BDMTable": "bdm_ldp_machineTransHis",
+    "HisTable": "fdm_ldp_machineTransHis_his"
+  },
+  "columnMappings": [
+    {"source": "ID", "target": "ID"},
+    {"source": "MSS_MACHINE_NUMBER", "target": "deviceNo"},
+    {"source": "DELIVERY_DATE", "target": "transportDate"},
+    {"source": "SCC_LOGISTICS_COMP_ID", "target": "transportUnit"},
+    {"source": "ARRIVED_DATE", "target": "actualDeliveryDate"},
+    {"source": "DEL_PERSON", "target": "carrier"},
+    {"source": "DEL_PHONE", "target": "carrierPhone"},
+    {"source": "DEL_CAR_NUMBER", "target": "vehicleNo"},
+    {"source": "RECV_COMPANY", "target": "purchaserUnit"},
+    {"source": "RECV_ADDRESS", "target": "purchaserAddress"},
+    {"source": "RECV_PERSON", "target": "purchaser"},
+    {"source": "RECV_PHONE", "target": "purchaserPhone"},
+    {"source": "TRANS_STATUS", "target": "overFlag"},
+    {"source": "DELIVERY_FORM_SN", "target": "deliveryNumber"},
+    {"source": "CHAN_NET_ID", "target": "chanNetId"},
+    {"source": "RECV_MAC_DATE", "target": "receivedDate"},
+    {"source": "SCC_COMPANY_ID", "target": "supplyId"}
+  ]
+}

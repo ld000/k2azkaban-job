@@ -3,11 +3,10 @@ package job.ldp;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.k2data.job.common.BaseJob;
-import com.k2data.job.domain.MachineDimension;
-import com.k2data.job.persistence.BoundSql;
-import com.k2data.job.persistence.SqlRunner;
-import com.k2data.job.utils.StringUtils;
+import com.k2data.platform.domain.MachineDimension;
+import com.k2data.platform.persistence.BoundSql;
+import com.k2data.platform.persistence.SqlRunner;
+import com.k2data.platform.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +15,8 @@ import java.util.Map;
 /**
  * @author lidong 16-12-8.
  */
-public class FilterSameDimensionJob extends BaseJob {
+public class FilterSameDimensionJob {
 
-    @Override
     public void run() {
         Map<String, List<Map<String, Object>>> map = Maps.newHashMap();
         String sameDataSql = "SELECT a.dimensionName, a.dimensionType" +

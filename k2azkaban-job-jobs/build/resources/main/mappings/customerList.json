@@ -1,0 +1,21 @@
+{
+  "sourceTable": "TB_LGBD_CUSTOMERLIST",
+  "targetTable": "LG_CUSTOMERLIST",
+  "type": "full",
+  "flagColumn": "FLAG",
+  "history": {
+    "type": "zipper",
+    "BDMTable": "bdm_ldp_customerList",
+    "HisTable": "fdm_ldp_customerList_his"
+  },
+  "columnMappings": [
+    {"source": "MSS_CUSTOMER_ID", "target": "ID"},
+    {"source": "SCC_COMPANY_ID", "target": "customerNo"},
+    {"source": "MSS_CUSTOMER_NAME", "target": "customerName"},
+    {"source": "SEX_NO", "target": "sexNo"},
+    {"source": "CUSTOMER_TYPE", "target": "type"},
+    {"source": "ID_NUMBER", "target": "certificateNo"},
+    {"source": "CELLPHONE", "target": "telephone"},
+    {"source": "CUSTOMER_TRADE_NO", "target": "tradeNo"}
+  ]
+}

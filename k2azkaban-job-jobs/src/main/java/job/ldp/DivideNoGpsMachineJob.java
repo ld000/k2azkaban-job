@@ -1,15 +1,13 @@
 package job.ldp;
 
-import com.k2data.job.common.BaseJob;
-import com.k2data.job.persistence.SqlRunner;
-import com.k2data.job.persistence.transaction.TransactionUtils;
+import com.k2data.platform.persistence.SqlRunner;
+import com.k2data.platform.persistence.transaction.TransactionUtils;
 
 /**
  * @author lidong 16-12-12.
  */
-public class DivideNoGpsMachineJob extends BaseJob {
+public class DivideNoGpsMachineJob {
 
-    @Override
     public void run() {
         String updateGpsNoSql = "UPDATE lg_machineProfile b SET b.gpsNo = (SELECT a.gpsNo FROM lg_machineGpsContrast a WHERE a.deviceNo = b.deviceNo)";
 
@@ -106,6 +104,7 @@ public class DivideNoGpsMachineJob extends BaseJob {
             TransactionUtils.commitTransaction();
         } catch (Exception e) {
             TransactionUtils.rollbackTransaction();
+            throw new RuntimeException(e);
         } finally {
             TransactionUtils.closeConnection();
         }

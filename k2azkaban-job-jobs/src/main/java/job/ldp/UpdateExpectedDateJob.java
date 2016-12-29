@@ -1,14 +1,12 @@
 package job.ldp;
 
-import com.k2data.job.common.BaseJob;
-import com.k2data.job.persistence.SqlRunner;
+import com.k2data.platform.persistence.SqlRunner;
 
 /**
  * @author lidong 16-12-9.
  */
-public class UpdateExpectedDateJob extends BaseJob {
+public class UpdateExpectedDateJob {
 
-    @Override
     public void run() {
         String sql = "UPDATE lg_machineTransportHistory a" +
                 "        SET a.expectedDeliveryDate = (" +

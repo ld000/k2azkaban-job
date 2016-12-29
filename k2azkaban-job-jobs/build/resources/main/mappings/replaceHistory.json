@@ -1,0 +1,28 @@
+{
+  "sourceTable": "TB_LGBD_ITEMREPLACEHISTORY",
+  "targetTable": "LG_REPLACEHISTORY",
+  "type": "add",
+  "sourceWhere": ["(FLAG = '1' OR FLAG = '5')"],
+  "flagColumn": "FLAG",
+  "history": {
+    "type": "zipper",
+    "BDMTable": "bdm_ldp_replaceHistory",
+    "HisTable": "fdm_ldp_replaceHistory_his"
+  },
+  "columnMappings": [
+    {"source": "ID", "target": "ID"},
+    {"source": "MSS_MACHINE_NUMBER", "target": "deviceNo"},
+    {"source": "CHANGE_DATE", "target": "replaceTime"},
+    {"source": "FORM_SN", "target": "orderNo"},
+    {"source": "NEW_MATERIAL_NUMBER", "target": "replaceCode"},
+    {"source": "NEW_NP_NUMBER", "target": "replaceNo"},
+    {"source": "NEW_MATERIAL_NAME", "target": "replaceName"},
+    {"source": "NEW_QTY", "target": "replaceNums"},
+    {"source": "NEW_SUPPLY_ID", "target": "supplier"},
+    {"source": "OLD_MATERIAL_NUMBER", "target": "OldReplaceCode"},
+    {"source": "OLD_FP_NUMBER", "target": "OldReplaceNo"},
+    {"source": "OLD_MATERIAL_NAME", "target": "OldReplaceName"},
+    {"source": "OLD_SUPPLY_ID", "target": "Oldsupplier"},
+    {"source": "FAULTCLASS_ID", "target": "faultClassId"}
+  ]
+}

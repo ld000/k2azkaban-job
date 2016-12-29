@@ -1,0 +1,19 @@
+{
+  "sourceTable": "TB_LGBD_CHANNETLIST",
+  "targetTable": "LG_CHANNETLIST",
+  "type": "full",
+  "flagColumn": "FLAG",
+  "history": {
+    "type": "zipper",
+    "BDMTable": "BDM_LDP_CHANNETLIST",
+    "HisTable": "FDM_LDP_CHANNETLIST_HIS"
+  },
+  "columnMappings": [
+    {"source": "SCC_CHAN_NET_ID", "target": "ID"},
+    {"source": "CHANNEL_NAME", "target": "channetName"},
+    {"source": "PARENT_CHAN_NET_ID", "target": "parentID"},
+    {"source": "CODE", "target": "netNo"},
+    {"source": "SCC_CHAN_NET_NAME", "target": "netName"},
+    {"source": "SORT_ORDER", "target": "sortOrder"}
+  ]
+}

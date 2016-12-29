@@ -2,10 +2,9 @@ package job.ldp;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.k2data.job.common.BaseJob;
-import com.k2data.job.common.GeneralQueryService;
-import com.k2data.job.domain.MachineDimension;
-import com.k2data.job.etl.ETLTool;
+import com.k2data.platform.domain.MachineDimension;
+import com.k2data.platform.etl.ETLTool;
+import job.common.GeneralQueryService;
 
 import java.io.File;
 import java.util.List;
@@ -14,9 +13,8 @@ import java.util.Map;
 /**
  * @author lidong 12/1/16.
  */
-public class MachineDimensionJob extends BaseJob {
+public class MachineDimensionJob {
 
-    @Override
     public void run() {
         String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 

@@ -1,7 +1,7 @@
 package job.common;
 
-import com.k2data.job.domain.MachineDimension;
-import com.k2data.job.common.mapper.GeneralQueryDao;
+import com.k2data.platform.domain.MachineDimension;
+import job.common.mapper.GeneralQueryDao;
 
 import java.util.List;
 

@@ -1,7 +1,5 @@
 package job.common;
 
-import com.k2data.job.etl.ETLTool;
-
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URL;

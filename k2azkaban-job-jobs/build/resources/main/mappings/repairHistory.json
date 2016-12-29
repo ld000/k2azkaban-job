@@ -1,0 +1,24 @@
+{
+  "sourceTable": "TB_LGBD_REPAIRHISTORY",
+  "targetTable": "LG_REPAIRHISTORY",
+  "type": "add",
+  "sourceWhere": ["(FLAG = '1' OR FLAG = '5')"],
+  "flagColumn": "FLAG",
+  "history": {
+    "type": "zipper",
+    "BDMTable": "bdm_ldp_repairHistory",
+    "HisTable": "fdm_ldp_repairHistory_his"
+  },
+  "columnMappings": [
+    {"source": "ID", "target": "ID"},
+    {"source": "MSS_MACHINE_NUMBER", "target": "deviceNo"},
+    {"source": "SERV_ORDER_DATE", "target": "repairTime"},
+    {"source": "SERV_ORDER_NO", "target": "orderNo"},
+    {"source": "SUPPLIER", "target": "orderHuman"},
+    {"source": "PHONE", "target": "orderPhone"},
+    {"source": "SUPPLYCOMID", "target": "serviceNo"},
+    {"source": "FAULT_DESC", "target": "troubleInfo"},
+    {"source": "FEEDBACK_MSG", "target": "feedBack"},
+    {"source": "SERV_CHAN_INFO_ID", "target": "chanInfoId"}
+  ]
+}

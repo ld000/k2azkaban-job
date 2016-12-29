@@ -1,14 +1,12 @@
 package job.ldp;
 
-import com.k2data.job.common.BaseJob;
-import com.k2data.job.persistence.SqlRunner;
+import com.k2data.platform.persistence.SqlRunner;
 
 /**
  * @author lidong 16-12-12.
  */
-public class UpdateTransHisDealerIdJob extends BaseJob {
+public class UpdateTransHisDealerIdJob {
     
-    @Override
     public void run() {
         String updateDealIdSql = "UPDATE lg_machineTransportHistory a" +
                 "        SET a.dealerId = (" +

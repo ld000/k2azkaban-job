@@ -1,6 +1,6 @@
 package job.common.mapper;
 
-import com.k2data.job.domain.MachineDimension;
+import com.k2data.platform.domain.MachineDimension;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

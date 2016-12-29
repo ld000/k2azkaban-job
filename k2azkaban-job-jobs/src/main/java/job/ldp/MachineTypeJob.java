@@ -1,9 +1,8 @@
 package job.ldp;
 
 import com.google.common.collect.Lists;
-import com.k2data.job.common.BaseJob;
-import com.k2data.job.common.GeneralQueryService;
-import com.k2data.job.etl.ETLTool;
+import com.k2data.platform.etl.ETLTool;
+import job.common.GeneralQueryService;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -14,9 +13,8 @@ import java.util.Objects;
 /**
  * @author lidong 12/1/16.
  */
-public class MachineTypeJob extends BaseJob {
+public class MachineTypeJob {
 
-    @Override
     public void run() {
         String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 
