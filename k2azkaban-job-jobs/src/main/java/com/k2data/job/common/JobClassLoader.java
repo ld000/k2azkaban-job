@@ -18,8 +18,6 @@ public class JobClassLoader {
             throw new IllegalArgumentException("必须指定映射文件位置。");
         }
 
-        loadJarPath(System.getenv("AIRFLOW_HOME") + "/dags/lib");
-
 //        if ("ldp".equals(args[0])) {
 //            ETLTool.transportLDPData(args[1]);
 //        }

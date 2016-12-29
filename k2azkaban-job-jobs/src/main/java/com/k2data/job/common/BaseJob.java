@@ -3,8 +3,9 @@ package com.k2data.job.common;
 /**
  * @author lidong 16-12-7.
  */
-public abstract class BaseJob {
+@FunctionalInterface
+public interface BaseJob {
 
-    public abstract void run();
+    public void run();
 
 }

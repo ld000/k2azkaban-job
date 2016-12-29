@@ -1,10 +1,10 @@
 package com.k2data.job.ldp;
 
 import com.google.common.collect.Lists;
+import com.k2data.job.common.GeneralQueryService;
 import com.k2data.platform.etl.ETLTool;
 import com.k2data.platform.persistence.SqlRunner;
 import com.k2data.platform.utils.StringUtils;
-import com.k2data.job.common.GeneralQueryService;
 
 import java.io.File;
 import java.util.List;

@@ -1,8 +1,8 @@
 package com.k2data.job.ldp;
 
 import com.google.common.collect.Lists;
-import com.k2data.platform.etl.ETLTool;
 import com.k2data.job.common.GeneralQueryService;
+import com.k2data.platform.etl.ETLTool;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;

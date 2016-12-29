@@ -2,9 +2,9 @@ package com.k2data.job.ldp;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.k2data.job.common.GeneralQueryService;
 import com.k2data.platform.domain.MachineDimension;
 import com.k2data.platform.etl.ETLTool;
-import com.k2data.job.common.GeneralQueryService;
 
 import java.io.File;
 import java.util.List;
