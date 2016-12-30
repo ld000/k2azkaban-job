@@ -1,23 +1,19 @@
 package com.k2data.job.ldp;
 
+import com.k2data.job.common.BaseJob;
+import com.k2data.job.common.JobProxyFactory;
 import com.k2data.platform.persistence.SqlRunner;
 
 /**
  * @author lidong 16-12-9.
  */
-public class UpdateExpectedDateJob {
+public class UpdateExpectedDateJob extends BaseJob {
 
     public static void main(String[] args) throws Exception {
-//        String propsFile = System.getenv("JOB_PROP_FILE");
-//        Properties prop = new Properties();
-//        prop.load(new BufferedReader(new FileReader(propsFile)));
-//
-//        String jobName = System.getenv("JOB_NAME");
-
-        UpdateExpectedDateJob job = new UpdateExpectedDateJob();
-        job.run();
+        runJob(new UpdateExpectedDateJob());
     }
 
+    @Override
     public void run() {
         String sql = "UPDATE lg_machineTransportHistory a" +
                 "        SET a.expectedDeliveryDate = (" +

@@ -1,24 +1,20 @@
 package com.k2data.job.ldp;
 
+import com.k2data.job.common.BaseJob;
+import com.k2data.job.common.JobProxyFactory;
 import com.k2data.platform.persistence.SqlRunner;
 import com.k2data.platform.persistence.transaction.TransactionUtils;
 
 /**
  * @author lidong 16-12-12.
  */
-public class DivideNoGpsMachineJob {
+public class DivideNoGpsMachineJob extends BaseJob {
 
     public static void main(String[] args) throws Exception {
-//        String propsFile = System.getenv("JOB_PROP_FILE");
-//        Properties prop = new Properties();
-//        prop.load(new BufferedReader(new FileReader(propsFile)));
-//
-//        String jobName = System.getenv("JOB_NAME");
-
-        DivideNoGpsMachineJob job = new DivideNoGpsMachineJob();
-        job.run();
+        runJob(new DivideNoGpsMachineJob());
     }
 
+    @Override
     public void run() {
         String updateGpsNoSql = "UPDATE lg_machineProfile b SET b.gpsNo = (SELECT a.gpsNo FROM lg_machineGpsContrast a WHERE a.deviceNo = b.deviceNo)";
 

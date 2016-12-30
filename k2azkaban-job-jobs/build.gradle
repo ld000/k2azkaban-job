@@ -1,11 +1,4 @@
-apply plugin: 'java'
-
 dependencies {
     compile project(':k2azkaban-job-common')
 }
 
-task srcZip(type: Zip, dependsOn: build) {
-    classifier = 'src'
-    from sourceSets*.resources
-//    from 'build/libs'
-}

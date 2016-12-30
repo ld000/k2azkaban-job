@@ -3,6 +3,8 @@ package com.k2data.job.ldp;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.k2data.job.common.BaseJob;
+import com.k2data.job.common.JobProxyFactory;
 import com.k2data.platform.domain.MachineDimension;
 import com.k2data.platform.persistence.BoundSql;
 import com.k2data.platform.persistence.SqlRunner;
@@ -15,19 +17,13 @@ import java.util.Map;
 /**
  * @author lidong 16-12-8.
  */
-public class FilterSameDimensionJob {
+public class FilterSameDimensionJob extends BaseJob {
 
     public static void main(String[] args) throws Exception {
-//        String propsFile = System.getenv("JOB_PROP_FILE");
-//        Properties prop = new Properties();
-//        prop.load(new BufferedReader(new FileReader(propsFile)));
-//
-//        String jobName = System.getenv("JOB_NAME");
-
-        FilterSameDimensionJob job = new FilterSameDimensionJob();
-        job.run();
+        runJob(new FilterSameDimensionJob());
     }
 
+    @Override
     public void run() {
         Map<String, List<Map<String, Object>>> map = Maps.newHashMap();
         String sameDataSql = "SELECT a.dimensionName, a.dimensionType" +
@@ -67,18 +63,6 @@ public class FilterSameDimensionJob {
 
             innerList.add(ldpMap);
         }
-
-        String filterType1 = "UPDATE lg_machineProfile SET bookBuildingId = ? WHERE bookBuildingId IN ($);" +
-                "UPDATE lg_machineProfileNoGps SET bookBuildingId = ? WHERE bookBuildingId IN ($);" +
-                "UPDATE lg_repairHistory SET serviceNo = ? WHERE serviceNo IN ($);" +
-                "UPDATE lg_serviceHistory SET serviceNo = ? WHERE serviceNo IN ($);" +
-                "UPDATE lg_upkeepHistory SET supplyId = ? WHERE supplyId IN ($);";
-        String filterType3 = "UPDATE lg_dealerInChanNet SET supplyId = ? WHERE supplyId IN ($);" +
-                "UPDATE lg_machineProfile SET saleUnitId = ? WHERE saleUnitId IN ($);" +
-                "UPDATE lg_machineProfileNoGps SET saleUnitId = ? WHERE saleUnitId IN ($);" +
-                "UPDATE lg_machineTransportHistory SET supplyId = ? WHERE supplyId IN ($);";
-        String filterType10 = "UPDATE lg_replaceHistory SET supplier = ? WHERE supplier IN ($);" +
-                "UPDATE lg_replaceHistory SET oldSupplier = ? WHERE oldSupplier IN ($);";
 
         // 1 machineprofile machineprofilenogps.bookBuildingId, repairhistory.serviceno, servicehistory.serviceno, upkeephistory.supplyid
         // 3 dealerinchannet.supplyid, machineprofile machineprofilenogps.saleunitid, machinetranshis.supplyid

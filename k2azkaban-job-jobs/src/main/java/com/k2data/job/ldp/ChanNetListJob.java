@@ -1,13 +1,14 @@
 package com.k2data.job.ldp;
 
 import com.google.common.collect.Lists;
+import com.k2data.job.common.BaseJob;
 import com.k2data.job.common.GeneralQueryService;
+import com.k2data.job.common.JobProxyFactory;
 import com.k2data.platform.etl.ETLTool;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -15,29 +16,17 @@ import java.util.Objects;
 /**
  * @author lidong 16-11-11.
  */
-public class ChanNetListJob {
+public class ChanNetListJob extends BaseJob {
 
     private static Logger logger = LogManager.getLogger(ChanNetListJob.class);
 
     public static void main(String[] args) throws Exception {
-//        String propsFile = System.getenv("JOB_PROP_FILE");
-//        Properties prop = new Properties();
-//        prop.load(new BufferedReader(new FileReader(propsFile)));
-//
-//        String jobName = System.getenv("JOB_NAME");
-
-        ChanNetListJob job = new ChanNetListJob();
-        job.run();
+        runJob(new ChanNetListJob());
     }
 
+    @Override
     public void run() {
-        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-
-        int firstIndex = path.lastIndexOf(System.getProperty("path.separator")) + 1;
-        int lastIndex = path.lastIndexOf(File.separator) + 1;
-        path = path.substring(firstIndex, lastIndex);
-
-        ETLTool.transportLDPData(path + "/mappings/chanNetList.json", list -> {
+        ETLTool.transportLDPData(getPath() + "mappings/chanNetList.json", list -> {
             List<Map<String, Object>> result = Lists.newArrayList();
             for (Map<String, Object> objMap : list) {
                 if (handleMachineType(objMap)) {
