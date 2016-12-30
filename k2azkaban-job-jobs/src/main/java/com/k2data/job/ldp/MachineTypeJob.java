@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.k2data.job.common.BaseJob;
 import com.k2data.job.common.GeneralQueryService;
 import com.k2data.job.common.JobProxyFactory;
+import com.k2data.job.common.JobUtils;
 import com.k2data.platform.etl.ETLTool;
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,15 +15,16 @@ import java.util.Objects;
 /**
  * @author lidong 12/1/16.
  */
-public class MachineTypeJob extends BaseJob {
+public class MachineTypeJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        runJob(new MachineTypeJob());
+        MachineTypeJob job = JobProxyFactory.getJdkProxy(MachineTypeJob.class);
+        job.run();
     }
 
     @Override
     public void run() {
-        ETLTool.transportLDPData(getPath() + "mappings/machineType.json", list -> {
+        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/machineType.json", list -> {
             List<Map<String, Object>> result = Lists.newArrayList();
 
             for (Map<String, Object> obj : list) {

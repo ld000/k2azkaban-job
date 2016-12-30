@@ -10,9 +10,9 @@ import java.lang.reflect.Method;
  */
 public class JobProxy implements MethodInterceptor {
 
-    private BaseJob baseJob;
+    private BaseAbstractJob baseJob;
 
-    public JobProxy(BaseJob baseJob) {
+    public JobProxy(BaseAbstractJob baseJob) {
         this.baseJob = baseJob;
     }
 

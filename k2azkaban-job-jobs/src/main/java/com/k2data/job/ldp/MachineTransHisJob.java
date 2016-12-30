@@ -3,6 +3,7 @@ package com.k2data.job.ldp;
 import com.google.common.collect.Lists;
 import com.k2data.job.common.BaseJob;
 import com.k2data.job.common.JobProxyFactory;
+import com.k2data.job.common.JobUtils;
 import com.k2data.platform.etl.ETLTool;
 
 import java.util.List;
@@ -12,15 +13,16 @@ import java.util.Objects;
 /**
  * @author lidong 12/1/16.
  */
-public class MachineTransHisJob extends BaseJob {
+public class MachineTransHisJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        runJob(new MachineTransHisJob());
+        MachineTransHisJob job = JobProxyFactory.getJdkProxy(MachineTransHisJob.class);
+        job.run();
     }
 
     @Override
     public void run() {
-        ETLTool.transportLDPData(getPath() + "mappings/machineTransHis.json", list -> {
+        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/machineTransHis.json", list -> {
             List<Map<String, Object>> result = Lists.newArrayList();
 
             for (Map<String, Object> obj : list) {

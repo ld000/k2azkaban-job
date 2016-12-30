@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.k2data.job.common.BaseJob;
 import com.k2data.job.common.GeneralQueryService;
 import com.k2data.job.common.JobProxyFactory;
+import com.k2data.job.common.JobUtils;
 import com.k2data.platform.etl.ETLTool;
 import com.k2data.platform.persistence.SqlRunner;
 import com.k2data.platform.utils.StringUtils;
@@ -15,15 +16,16 @@ import java.util.Objects;
 /**
  * @author lidong 12/1/16.
  */
-public class MachineProfileJob extends BaseJob {
+public class MachineProfileJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        runJob(new MachineProfileJob());
+        MachineProfileJob job = JobProxyFactory.getJdkProxy(MachineProfileJob.class);
+        job.run();
     }
 
     @Override
     public void run() {
-        ETLTool.transportLDPData(getPath() + "mappings/machineProfile.json", list -> {
+        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/machineProfile.json", list -> {
             SqlRunner.update("DELETE from lg_machineProfileNoGps");
 
             List<Map<String, Object>> result = Lists.newArrayList();

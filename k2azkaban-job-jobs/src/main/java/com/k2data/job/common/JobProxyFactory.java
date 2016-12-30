@@ -12,7 +12,7 @@ import java.lang.reflect.Proxy;
 public class JobProxyFactory {
 
     @SuppressWarnings("unchecked")
-    public static <T> T getCglibProxy(BaseJob baseJob) {
+    public static <T> T getCglibProxy(BaseAbstractJob baseJob) {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(baseJob.getClass());
         enhancer.setCallbacks(new Callback[]{NoOp.INSTANCE, new JobProxy(baseJob)});

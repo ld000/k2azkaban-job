@@ -7,10 +7,11 @@ import com.k2data.platform.persistence.SqlRunner;
 /**
  * @author lidong 16-12-9.
  */
-public class UpdateExpectedDateJob extends BaseJob {
+public class UpdateExpectedDateJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        runJob(new UpdateExpectedDateJob());
+        UpkeepHistoryJob job = JobProxyFactory.getJdkProxy(UpkeepHistoryJob.class);
+        job.run();
     }
 
     @Override

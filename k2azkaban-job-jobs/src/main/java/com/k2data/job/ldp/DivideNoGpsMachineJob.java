@@ -8,10 +8,11 @@ import com.k2data.platform.persistence.transaction.TransactionUtils;
 /**
  * @author lidong 16-12-12.
  */
-public class DivideNoGpsMachineJob extends BaseJob {
+public class DivideNoGpsMachineJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        runJob(new DivideNoGpsMachineJob());
+        DivideNoGpsMachineJob job = JobProxyFactory.getJdkProxy(DivideNoGpsMachineJob.class);
+        job.run();
     }
 
     @Override

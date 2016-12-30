@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  */
 public class JobUtils {
 
-    public static String getRootPath() {
+    public static void setRootPath() {
         String propsFile = System.getenv("JOB_PROP_FILE");
 //        Properties prop = new Properties();
 //        prop.load(new BufferedReader(new FileReader(propsFile)));
@@ -18,7 +18,7 @@ public class JobUtils {
         Pattern pattern = Pattern.compile("^(.*/[0-9]*?/)(.*)$");
         Matcher matcher = pattern.matcher(propsFile);
 
-        String path = "";
+        String path;
         if (matcher.find()) {
             path = matcher.group(1);
             System.setProperty("path", path);
@@ -26,8 +26,11 @@ public class JobUtils {
             throw new RuntimeException("解析 project 路径出错...");
         }
 
-        return path;
+        System.setProperty("rootPath", path);
     }
 
+    public static String getRootPath() {
+        return System.getProperty("rootPath");
+    }
 
 }

@@ -7,10 +7,11 @@ import com.k2data.platform.persistence.SqlRunner;
 /**
  * @author lidong 16-12-12.
  */
-public class UpdateTransHisDealerIdJob extends BaseJob {
+public class UpdateTransHisDealerIdJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        runJob(new UpdateTransHisDealerIdJob());
+        UpdateTransHisDealerIdJob job = JobProxyFactory.getJdkProxy(UpdateTransHisDealerIdJob.class);
+        job.run();
     }
 
     @Override

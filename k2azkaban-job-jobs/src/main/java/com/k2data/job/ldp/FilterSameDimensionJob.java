@@ -17,10 +17,11 @@ import java.util.Map;
 /**
  * @author lidong 16-12-8.
  */
-public class FilterSameDimensionJob extends BaseJob {
+public class FilterSameDimensionJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        runJob(new FilterSameDimensionJob());
+        FilterSameDimensionJob job = JobProxyFactory.getJdkProxy(FilterSameDimensionJob.class);
+        job.run();
     }
 
     @Override

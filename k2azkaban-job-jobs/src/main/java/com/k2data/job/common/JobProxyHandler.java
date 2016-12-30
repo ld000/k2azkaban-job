@@ -18,15 +18,14 @@ public class JobProxyHandler<T> implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
+        JobUtils.setRootPath();
+        JobClassLoader.loadJarPath(JobUtils.getRootPath() + "lib");
 
         try {
             return method.invoke(proxyObj.newInstance(), args);
         } catch (Exception e) {
             throw new InternalException(e);
         }
-
-
     }
 
 }
