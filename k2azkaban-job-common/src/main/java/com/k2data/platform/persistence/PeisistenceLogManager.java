@@ -1,5 +1,6 @@
 package com.k2data.platform.persistence;
 
+import com.k2data.platform.persistence.support.BoundSql;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

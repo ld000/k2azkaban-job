@@ -29,6 +29,7 @@ allprojects {
         mysqlVersion = '5.1.30'
         mybatisVersion = '3.4.1'
         cglibVersion = '3.2.4'
+        okHttpVersion = '3.3.1'
     }
 
     def loggerLibraries = [
@@ -43,6 +44,7 @@ allprojects {
         compile "mysql:mysql-connector-java:${mysqlVersion}"
         compile "org.mybatis:mybatis:${mybatisVersion}"
         compile "cglib:cglib:${cglibVersion}"
+        compile "com.squareup.okhttp3:okhttp:${okHttpVersion}"
         compile group: 'com.alibaba', name: 'fastjson', version:'1.2.20'
         compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.5'
         compile group: 'org.apache.commons', name: 'commons-io', version:'1.3.2'
@@ -68,6 +70,8 @@ task packageZip(type: Zip, dependsOn: build) {
     }
     from('k2azkaban-job-jobs/build/resources/main/') {
         into('/')
+        exclude("k2data.properties")
+        rename('k2data.production.properties', 'k2data.properties')
     }
     from('k2azkaban-job-jobs/build/libs') {
         into('/')
@@ -75,7 +79,3 @@ task packageZip(type: Zip, dependsOn: build) {
 }
 packageZip.dependsOn(project("k2azkaban-job-common").copyJars)
 packageZip.dependsOn(subprojects.build)
-
-
-
-

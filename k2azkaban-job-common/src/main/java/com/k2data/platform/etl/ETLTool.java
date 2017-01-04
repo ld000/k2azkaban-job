@@ -2,7 +2,7 @@ package com.k2data.platform.etl;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Sets;
-import com.k2data.platform.persistence.BoundSql;
+import com.k2data.platform.persistence.support.BoundSql;
 import com.k2data.platform.persistence.LDPSqlRunner;
 import com.k2data.platform.persistence.SqlRunner;
 import com.k2data.platform.persistence.transaction.TransactionUtils;

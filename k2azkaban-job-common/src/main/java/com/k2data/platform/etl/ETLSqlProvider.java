@@ -1,6 +1,6 @@
 package com.k2data.platform.etl;
 
-import com.k2data.platform.persistence.BoundSql;
+import com.k2data.platform.persistence.support.BoundSql;
 
 import java.util.ArrayList;
 import java.util.List;

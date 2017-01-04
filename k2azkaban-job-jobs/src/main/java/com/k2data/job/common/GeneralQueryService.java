@@ -1,7 +1,8 @@
 package com.k2data.job.common;
 
-import com.k2data.job.common.mapper.GeneralQueryDao;
+import com.k2data.job.common.mapper.GeneralQuerySqlProvider;
 import com.k2data.platform.domain.MachineDimension;
+import com.k2data.platform.persistence.SqlRunner;
 
 import java.util.List;
 
@@ -10,10 +11,18 @@ import java.util.List;
  */
 public class GeneralQueryService {
 
-    private static GeneralQueryDao generalQueryDao = PersistenceHelper.getMapper(GeneralQueryDao.class);
+    private static GeneralQuerySqlProvider sqlProvider = new GeneralQuerySqlProvider();
 
+    /**
+     * 获取字典值
+     *
+     * @param label
+     * @param type
+     * @param defaultValue
+     * @return
+     */
     public static String queryDictValue(String label, String type, String defaultValue) {
-        String value = generalQueryDao.queryDictValue(label, type);
+        String value = SqlRunner.selectOne(String.class, sqlProvider.queryDictValue(label, type));
 
         if (value == null)
             return defaultValue;
@@ -21,8 +30,23 @@ public class GeneralQueryService {
         return value;
     }
 
+    /**
+     * 根据类型获取维度列表
+     *
+     * @param type
+     * @return
+     */
     public static List<MachineDimension> queryMachineDimensionList(Integer type) {
-        return generalQueryDao.queryMachineDimensionList(type);
+        return SqlRunner.selectList(MachineDimension.class, sqlProvider.queryMachineDimensionList(type));
+    }
+
+    /**
+     * 获取 gpsNo 列表
+     *
+     * @return
+     */
+    public static List<String> queryGpsNo() {
+        return SqlRunner.selectList(String.class, sqlProvider.queryGpsNoList());
     }
 
 }

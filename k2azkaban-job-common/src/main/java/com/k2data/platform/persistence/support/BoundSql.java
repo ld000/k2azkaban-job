@@ -1,4 +1,4 @@
-package com.k2data.platform.persistence;
+package com.k2data.platform.persistence.support;
 
 import java.io.Serializable;
 import java.util.ArrayList;

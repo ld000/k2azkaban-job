@@ -6,7 +6,7 @@ import com.google.common.collect.Maps;
 import com.k2data.job.common.BaseJob;
 import com.k2data.job.common.JobProxyFactory;
 import com.k2data.platform.domain.MachineDimension;
-import com.k2data.platform.persistence.BoundSql;
+import com.k2data.platform.persistence.support.BoundSql;
 import com.k2data.platform.persistence.SqlRunner;
 import com.k2data.platform.utils.StringUtils;
 

@@ -2,6 +2,7 @@ package com.k2data.platform.persistence;
 
 import com.k2data.platform.exception.InternalException;
 import com.k2data.platform.persistence.callback.*;
+import com.k2data.platform.persistence.support.BoundSql;
 import com.k2data.platform.persistence.transaction.TransactionUtils;
 import com.k2data.platform.utils.ArrayUtils;
 import com.k2data.platform.utils.NumberUtils;

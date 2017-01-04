@@ -1,5 +1,6 @@
 package com.k2data.platform.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,6 +13,12 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
     public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
+
+    private static String[] parsePatterns = {
+            "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
+            "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
+            "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM",
+            "yyyy-MM-dd HH:mm:ss.SSS"};
     
     /**
      * 日期和时间的格式化方法
@@ -57,7 +64,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      * 
      * @return 格式化为{@link #DEFAULT_DATETIME_FORMAT}的{@link String}
      */
-    public static String formart(final Date time, final String pattern) {
+    public static String format(final Date time, final String pattern) {
         return new SimpleDateFormat(pattern).format(time);
     }
     
@@ -128,20 +135,16 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         
         return instance.getTime();
     }
-    
-    /**
-     * 页面查询条件需要的年份：获得的结果为当前年份的前intValue年到后intValue年的集合
-     * 
-     * @param intValue 需要查询年份的范围：例如intValue=5 当前年为2015年 则list包含2010~2020 
-     * @return 返回一个集合，集合中包含年份的值
-     */
-    public static ArrayList<String> getQueryDateAsLsit(int intValue) {
-        ArrayList<String> aList =  new ArrayList<String>();
-        Date date = new Date();
-        for(int i = Integer.parseInt("-" + intValue); i < (intValue + 1); i++) {
-            aList.add(formart(addYear(date, i), "yyyy"));
+
+    public static Date parseDate(Object str) {
+        if (str == null){
+            return null;
         }
-        return aList;
+        try {
+            return parseDate(str.toString(), parsePatterns);
+        } catch (ParseException e) {
+            return null;
+        }
     }
     
 }

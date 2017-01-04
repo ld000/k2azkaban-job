@@ -3,6 +3,7 @@ package com.k2data.platform.persistence;
 import com.k2data.platform.persistence.callback.ConnectionCallback;
 import com.k2data.platform.persistence.callback.ConnectionQueryMapCallback;
 import com.k2data.platform.persistence.callback.ConnectionUpdateCallback;
+import com.k2data.platform.persistence.support.BoundSql;
 
 import java.sql.Connection;
 import java.util.List;
