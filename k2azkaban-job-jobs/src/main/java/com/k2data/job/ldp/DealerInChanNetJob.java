@@ -11,13 +11,13 @@ import com.k2data.platform.etl.ETLTool;
 public class DealerInChanNetJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        DealerInChanNetJob job = JobProxyFactory.getJdkProxy(DealerInChanNetJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(DealerInChanNetJob.class);
         job.run();
     }
 
     @Override
     public void run() {
-        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/dealerInChannet.json");
+        ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/dealerInChannet.json");
     }
 
 }

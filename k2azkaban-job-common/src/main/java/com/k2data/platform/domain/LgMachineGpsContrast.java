@@ -1,19 +1,18 @@
-/**
- * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package com.k2data.platform.domain;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 整机与GPS设备对照Entity
- * @author chenjingsi
- * @version 2016-06-03
- */
-public class LgMachineGpsContrast {
-    
-    private static final long serialVersionUID = 1L;
+@Table(name = "lg_machineGpsContrast")
+public class LgMachineGpsContrast implements Serializable {
 
+    @Transient
+    private static final long serialVersionUID = -4729809744908225907L;
+
+    @Id
     private String id;
     private String deviceNo;        // 车辆编号
     private String gpsNo;        // 控制器编码

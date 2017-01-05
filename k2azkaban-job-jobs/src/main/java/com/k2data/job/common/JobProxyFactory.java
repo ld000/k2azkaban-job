@@ -1,9 +1,5 @@
 package com.k2data.job.common;
 
-import net.sf.cglib.proxy.Callback;
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.NoOp;
-
 import java.lang.reflect.Proxy;
 
 /**
@@ -11,15 +7,15 @@ import java.lang.reflect.Proxy;
  */
 public class JobProxyFactory {
 
-    @SuppressWarnings("unchecked")
-    public static <T> T getCglibProxy(BaseAbstractJob baseJob) {
-        Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(baseJob.getClass());
-        enhancer.setCallbacks(new Callback[]{NoOp.INSTANCE, new JobProxy(baseJob)});
-        enhancer.setCallbackFilter(new JobProxyFilter());
-
-        return (T) enhancer.create();
-    }
+//    @SuppressWarnings("unchecked")
+//    public static <T> T getCglibProxy(BaseAbstractJob baseJob) {
+//        Enhancer enhancer = new Enhancer();
+//        enhancer.setSuperclass(baseJob.getClass());
+//        enhancer.setCallbacks(new Callback[]{NoOp.INSTANCE, new JobProxy(baseJob)});
+//        enhancer.setCallbackFilter(new JobProxyFilter());
+//
+//        return (T) enhancer.create();
+//    }
 
     @SuppressWarnings("unchecked")
     public static <T> T getJdkProxy(Class<T> clazz) {

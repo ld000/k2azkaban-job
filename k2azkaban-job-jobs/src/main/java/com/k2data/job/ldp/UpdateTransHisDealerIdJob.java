@@ -10,7 +10,7 @@ import com.k2data.platform.persistence.SqlRunner;
 public class UpdateTransHisDealerIdJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        UpdateTransHisDealerIdJob job = JobProxyFactory.getJdkProxy(UpdateTransHisDealerIdJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(UpdateTransHisDealerIdJob.class);
         job.run();
     }
 

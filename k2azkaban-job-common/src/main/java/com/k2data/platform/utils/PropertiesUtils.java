@@ -4,10 +4,7 @@ import com.k2data.platform.exception.InternalException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 
@@ -118,6 +115,29 @@ public class PropertiesUtils {
         return value != null ? Boolean.valueOf(value) : defaultValue;
     }
 
+    public static void main(String[] args) {
+        String path = "/opt/k2data/azkaban-exec-server/executions/5/lib/k2azkaban-job-common-1.0.jar";
+        try {
+            path = java.net.URLDecoder.decode(path, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(path);
+
+        String patha = "";
+        String[] paths = path.split(File.separator);
+        for (int i = 0; i < paths.length - 2; i++) {
+            if (i != 0) {
+                patha += File.separator;
+            }
+
+            patha += paths[i];
+        }
+
+        System.out.println(patha);
+    }
+
     /**
      * 载入多个文件, 文件路径使用Spring Resource格式.
      */
@@ -125,7 +145,24 @@ public class PropertiesUtils {
         Properties props = new Properties();
 
         for (String location : resourcesPaths) {
-            File file = new File("/opt/azkaban/conf", location);
+            String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+            try {
+                path = java.net.URLDecoder.decode(path, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
+            String[] paths = path.split(File.separator);
+            path = "";
+            for (int i = 0; i < paths.length - 2; i++) {
+                if (i != 0) {
+                    path += File.separator;
+                }
+
+                path += paths[i];
+            }
+            path += "/conf";
+
+            File file = new File(path, location);
 
             InputStream is = null;
             try {

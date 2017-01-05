@@ -22,13 +22,13 @@ public class ChanNetListJob implements BaseJob {
     private static Logger logger = LogManager.getLogger(ChanNetListJob.class);
 
     public static void main(String[] args) throws Exception {
-        ChanNetListJob job = JobProxyFactory.getJdkProxy(ChanNetListJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(ChanNetListJob.class);
         job.run();
     }
 
     @Override
     public void run() {
-        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/chanNetList.json", list -> {
+        ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/chanNetList.json", list -> {
             List<Map<String, Object>> result = Lists.newArrayList();
             for (Map<String, Object> objMap : list) {
                 if (handleMachineType(objMap)) {

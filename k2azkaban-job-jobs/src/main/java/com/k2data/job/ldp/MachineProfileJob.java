@@ -19,13 +19,13 @@ import java.util.Objects;
 public class MachineProfileJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        MachineProfileJob job = JobProxyFactory.getJdkProxy(MachineProfileJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(MachineProfileJob.class);
         job.run();
     }
 
     @Override
     public void run() {
-        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/machineProfile.json", list -> {
+        ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/machineProfile.json", list -> {
             SqlRunner.update("DELETE from lg_machineProfileNoGps");
 
             List<Map<String, Object>> result = Lists.newArrayList();

@@ -1,9 +1,9 @@
 package com.k2data.platform.persistence.callback;
 
 import com.k2data.platform.exception.InternalException;
-import com.k2data.platform.persistence.support.BoundSql;
 import com.k2data.platform.persistence.JdbcUtils;
 import com.k2data.platform.persistence.PeisistenceLogManager;
+import com.k2data.platform.persistence.support.BoundSql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

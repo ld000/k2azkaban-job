@@ -8,12 +8,14 @@ import java.util.regex.Pattern;
  */
 public class JobUtils {
 
-    public static void setRootPath() {
+    public static void setRootPath(boolean dev) {
         String propsFile = System.getenv("JOB_PROP_FILE");
 //        Properties prop = new Properties();
 //        prop.load(new BufferedReader(new FileReader(propsFile)));
 //
 //        String jobName = System.getenv("JOB_NAME");
+
+
 
         Pattern pattern = Pattern.compile("^(.*/[0-9]*?/)(.*)$");
         Matcher matcher = pattern.matcher(propsFile);

@@ -11,13 +11,13 @@ import com.k2data.platform.etl.ETLTool;
 public class FaultClassJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        FaultClassJob job = JobProxyFactory.getJdkProxy(FaultClassJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(FaultClassJob.class);
         job.run();
     }
 
     @Override
     public void run() {
-        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/faultClass.json");
+        ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/faultClass.json");
     }
 
 }

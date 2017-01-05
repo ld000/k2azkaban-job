@@ -11,7 +11,7 @@ import com.k2data.platform.persistence.transaction.TransactionUtils;
 public class DivideNoGpsMachineJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        DivideNoGpsMachineJob job = JobProxyFactory.getJdkProxy(DivideNoGpsMachineJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(DivideNoGpsMachineJob.class);
         job.run();
     }
 

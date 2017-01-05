@@ -1,7 +1,5 @@
 package com.k2data.job.common;
 
-import com.k2data.platform.exception.InternalException;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
@@ -18,13 +16,13 @@ public class JobProxyHandler<T> implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        JobUtils.setRootPath();
+        JobUtils.setRootPath(false);
         JobClassLoader.loadJarPath(JobUtils.getRootPath() + "lib");
 
         try {
             return method.invoke(proxyObj.newInstance(), args);
         } catch (Exception e) {
-            throw new InternalException(e);
+            throw new RuntimeException(e);
         }
     }
 

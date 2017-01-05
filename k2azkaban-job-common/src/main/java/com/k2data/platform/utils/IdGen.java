@@ -3,7 +3,6 @@
  */
 package com.k2data.platform.utils;
 
-import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.UUID;
 

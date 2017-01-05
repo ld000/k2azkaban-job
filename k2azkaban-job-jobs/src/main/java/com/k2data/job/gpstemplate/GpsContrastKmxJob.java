@@ -2,12 +2,10 @@ package com.k2data.job.gpstemplate;
 
 import com.k2data.job.common.BaseJob;
 import com.k2data.job.common.JobProxyFactory;
-import com.k2data.platform.domain.LgMachineGpsContrast;
 import com.k2data.platform.kmx.KmxClient;
 import com.k2data.platform.kmx.cond.KmxDevicesListV2Cond;
 import com.k2data.platform.kmx.domain.KmxDataRowsRspDomain;
 import com.k2data.platform.persistence.SqlRunner;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 

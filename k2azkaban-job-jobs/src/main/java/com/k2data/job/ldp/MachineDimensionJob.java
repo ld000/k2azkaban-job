@@ -18,7 +18,7 @@ import java.util.Map;
 public class MachineDimensionJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        MachineDimensionJob job = JobProxyFactory.getJdkProxy(MachineDimensionJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(MachineDimensionJob.class);
         job.run();
     }
 
@@ -27,7 +27,7 @@ public class MachineDimensionJob implements BaseJob {
         List<MachineDimension> source = GeneralQueryService.queryMachineDimensionList(3);
         Map<String, MachineDimension> sourceMap = Maps.uniqueIndex(source, machineDimension -> machineDimension.getDimensionName());
 
-        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/machineDimension.json", list -> {
+        ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/machineDimension.json", list -> {
             List<Map<String, Object>> result = Lists.newArrayList();
             for (Map<String, Object> obj : list) {
                 if ("03".equals(obj.get("TYPE"))) {

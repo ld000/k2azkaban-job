@@ -43,7 +43,7 @@ allprojects {
         compile "javax.servlet:javax.servlet-api:${servletApiVersion}"
         compile "mysql:mysql-connector-java:${mysqlVersion}"
         compile "org.mybatis:mybatis:${mybatisVersion}"
-        compile "cglib:cglib:${cglibVersion}"
+//        compile "cglib:cglib:${cglibVersion}"
         compile "com.squareup.okhttp3:okhttp:${okHttpVersion}"
         compile group: 'com.alibaba', name: 'fastjson', version:'1.2.20'
         compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.5'
@@ -55,7 +55,11 @@ allprojects {
 }
 
 project("k2azkaban-job-common") {
-    task copyJars(type: Copy) {
+    task deleteLib(type: Delete) {
+        delete "lib"
+    }
+
+    task copyJars(type: Copy, dependsOn: 'deleteLib') {
         from configurations.runtime
         into 'lib'
     }
@@ -68,9 +72,20 @@ task packageZip(type: Zip, dependsOn: build) {
     from('k2azkaban-job-common/lib') {
         into('lib')
     }
+    from('k2azkaban-job-common/extlib') {
+        into('lib')
+    }
+    from('k2azkaban-job-common/build/resources/main/') {
+        include("log4j2.component.properties")
+        into('lib')
+    }
     from('k2azkaban-job-jobs/build/resources/main/') {
         into('/')
+    }
+    from('k2azkaban-job-common/build/resources/main/') {
+        into('/conf')
         exclude("k2data.properties")
+        exclude("log4j2.component.properties")
         rename('k2data.production.properties', 'k2data.properties')
     }
     from('k2azkaban-job-jobs/build/libs') {

@@ -2,9 +2,9 @@ package com.k2data.platform.etl;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Sets;
-import com.k2data.platform.persistence.support.BoundSql;
 import com.k2data.platform.persistence.LDPSqlRunner;
 import com.k2data.platform.persistence.SqlRunner;
+import com.k2data.platform.persistence.support.BoundSql;
 import com.k2data.platform.persistence.transaction.TransactionUtils;
 import org.apache.commons.io.FileUtils;
 
@@ -24,14 +24,14 @@ public class ETLTool {
     /**
      * 同步 LDP 数据
      */
-    public static void transportLDPData(String mappingFileName) {
-        transportLDPData(mappingFileName, null);
+    public static void pullLDPData(String mappingFileName) {
+        pullLDPData(mappingFileName, null);
     }
 
     /**
      * 同步 LDP 数据
      */
-    public static void transportLDPData(String mappingFileName, final ETLDataPreHandler handler) {
+    public static void pullLDPData(String mappingFileName, final ETLDataPreHandler handler) {
         final ETLMappingDomain domain = resolveMappingFile(mappingFileName);
 
         List<Map<String, Object>> source = extraction(domain);

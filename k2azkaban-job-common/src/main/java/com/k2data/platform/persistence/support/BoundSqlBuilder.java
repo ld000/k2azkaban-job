@@ -2,14 +2,11 @@ package com.k2data.platform.persistence.support;
 
 import com.k2data.platform.utils.*;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import javax.persistence.Version;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 创建增删改查SQL的工具类<br>
@@ -59,7 +56,7 @@ public abstract class BoundSqlBuilder {
             return null;
         }
         
-        sql.append(")\nVALUES\n  ( ?").append(StringUtils.repeat(", ?", count - 1)).append(")");
+        sql.append(")VALUES  ( ?").append(StringUtils.repeat(", ?", count - 1)).append(")");
         
         return sql.toString();
     }

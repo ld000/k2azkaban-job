@@ -1,8 +1,8 @@
 package com.k2data.platform.utils;
 
-import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class Global {
 
-    private static Map<String, String> propMap = Maps.newHashMap();
+    private static Map<String, String> propMap = new HashMap<>();
 
     private static PropertiesUtils loader = new PropertiesUtils("k2data.properties");
 
@@ -55,6 +55,11 @@ public class Global {
             propMap.put(key, value != null ? value : StringUtils.EMPTY);
         }
         return value;
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(Global.getConfig("jdbc.url"));
     }
 
 }

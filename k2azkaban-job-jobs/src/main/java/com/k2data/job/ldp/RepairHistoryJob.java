@@ -11,13 +11,13 @@ import com.k2data.platform.etl.ETLTool;
 public class RepairHistoryJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        RepairHistoryJob job = JobProxyFactory.getJdkProxy(RepairHistoryJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(RepairHistoryJob.class);
         job.run();
     }
 
     @Override
     public void run() {
-        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/repairHistory.json");
+        ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/repairHistory.json");
     }
 
 }

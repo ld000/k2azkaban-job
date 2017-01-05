@@ -19,7 +19,7 @@ public class JobClassLoader {
         }
 
 //        if ("ldp".equals(args[0])) {
-//            ETLTool.transportLDPData(args[1]);
+//            ETLTool.pullLDPData(args[1]);
 //        }
 
 

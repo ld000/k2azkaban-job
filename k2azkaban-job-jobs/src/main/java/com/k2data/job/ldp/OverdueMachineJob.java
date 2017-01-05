@@ -11,13 +11,13 @@ import com.k2data.platform.etl.ETLTool;
 public class OverdueMachineJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        OverdueMachineJob job = JobProxyFactory.getJdkProxy(OverdueMachineJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(OverdueMachineJob.class);
         job.run();
     }
 
     @Override
     public void run() {
-        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/overdueMachine.json");
+        ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/overdueMachine.json");
     }
 
 }

@@ -6,8 +6,8 @@ import com.google.common.collect.Maps;
 import com.k2data.job.common.BaseJob;
 import com.k2data.job.common.JobProxyFactory;
 import com.k2data.platform.domain.MachineDimension;
-import com.k2data.platform.persistence.support.BoundSql;
 import com.k2data.platform.persistence.SqlRunner;
+import com.k2data.platform.persistence.support.BoundSql;
 import com.k2data.platform.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.Map;
 public class FilterSameDimensionJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        FilterSameDimensionJob job = JobProxyFactory.getJdkProxy(FilterSameDimensionJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(FilterSameDimensionJob.class);
         job.run();
     }
 

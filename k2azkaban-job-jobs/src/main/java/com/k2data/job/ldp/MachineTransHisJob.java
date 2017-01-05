@@ -16,13 +16,13 @@ import java.util.Objects;
 public class MachineTransHisJob implements BaseJob {
 
     public static void main(String[] args) throws Exception {
-        MachineTransHisJob job = JobProxyFactory.getJdkProxy(MachineTransHisJob.class);
+        BaseJob job = JobProxyFactory.getJdkProxy(MachineTransHisJob.class);
         job.run();
     }
 
     @Override
     public void run() {
-        ETLTool.transportLDPData(JobUtils.getRootPath() + "mappings/machineTransHis.json", list -> {
+        ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/machineTransHis.json", list -> {
             List<Map<String, Object>> result = Lists.newArrayList();
 
             for (Map<String, Object> obj : list) {

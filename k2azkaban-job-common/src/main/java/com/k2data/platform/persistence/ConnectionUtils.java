@@ -1,6 +1,7 @@
 package com.k2data.platform.persistence;
 
 import com.k2data.platform.exception.InternalException;
+import com.k2data.platform.utils.Global;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,13 +20,13 @@ public class ConnectionUtils {
      * @return 数据库连接
      */
     public static Connection getLDPConnection() {
-        String url = System.getenv("LDP_JDBC_URL");
-        String userName = System.getenv("LDP_JDBC_USERNAME");
-        String password = System.getenv("LDP_JDBC_PASSWORD");
+        String url = Global.getConfig("jdbc.ldp.url");
+        String userName = Global.getConfig("jdbc.ldp.username");
+        String password = Global.getConfig("jdbc.ldp.password");
 
         Connection conn;
         try {
-            Class.forName(System.getenv("LDP_JDBC_DRIVER"));
+            Class.forName(Global.getConfig("jdbc.ldp.driver"));
             conn = DriverManager.getConnection(url, userName, password);
         } catch (SQLException | ClassNotFoundException e) {
             throw new InternalException(e);
@@ -35,13 +36,13 @@ public class ConnectionUtils {
     }
 
     public static Connection getConnection() {
-        String url = System.getenv("JDBC_URL");
-        String userName = System.getenv("JDBC_USERNAME");
-        String password = System.getenv("JDBC_PASSWORD");
+        String url = Global.getConfig("jdbc.url");
+        String userName = Global.getConfig("jdbc.username");
+        String password = Global.getConfig("jdbc.password");
 
         Connection conn;
         try {
-            Class.forName(System.getenv("JDBC_DRIVER"));
+            Class.forName(Global.getConfig("jdbc.driver"));
             conn = DriverManager.getConnection(url, userName, password);
         } catch (SQLException | ClassNotFoundException e) {
             throw new InternalException(e);
