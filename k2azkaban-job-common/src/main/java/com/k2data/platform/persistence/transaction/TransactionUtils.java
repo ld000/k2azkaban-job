@@ -3,6 +3,7 @@ package com.k2data.platform.persistence.transaction;
 import com.k2data.platform.persistence.ConnectionUtils;
 import com.k2data.platform.persistence.JdbcUtils;
 
+import java.lang.ref.SoftReference;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -13,7 +14,7 @@ import java.sql.SQLException;
  */
 public class TransactionUtils {
 
-    private static final ThreadLocal<Connection> connectionHolder = new ThreadLocal<>(); // 绑定 Connection 对象到当前线程，用作事务控制
+    private static final ThreadLocal<SoftReference<Connection>> connectionHolder = new ThreadLocal<>(); // 绑定 Connection 对象到当前线程，用作事务控制
 
     /**
      * 获取可控制事务的 {@link Connection} 类
@@ -21,11 +22,17 @@ public class TransactionUtils {
      * @return {@link Connection}
      */
     public static Connection getConnection() {
-        Connection conn = connectionHolder.get();
+        SoftReference<Connection> softReference = connectionHolder.get();
+
+        Connection conn = null;
+        if (softReference != null) {
+            conn = softReference.get();
+        }
+
         try {
             if (conn == null || conn.isClosed()) {
                 conn = ConnectionUtils.getConnection();
-                connectionHolder.set(conn);
+                connectionHolder.set(new SoftReference<Connection>(conn));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

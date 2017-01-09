@@ -72,7 +72,7 @@ public abstract class BoundSqlBuilder {
         final Class<T> clazz = ClassUtils.getOriginalClass((Class<T>) model.getClass());
         
         // Sql语句
-        final StringBuilder sql = new StringBuilder("INSERT INTO ").append(ModelUtils.getTableName(clazz)).append("\n  (");
+        final StringBuilder sql = new StringBuilder("INSERT INTO ").append(ModelUtils.getTableName(clazz)).append(" (");
         
         // 所有IN的值储存在这里,是有顺序的
         final List<Object> inValues = new ArrayList<>();
@@ -108,7 +108,7 @@ public abstract class BoundSqlBuilder {
             return null;
         }
         
-        sql.append(")\nVALUES\n  ( ?").append(StringUtils.repeat(", ?", count - 1)).append(")");
+        sql.append(") VALUES ( ?").append(StringUtils.repeat(", ?", count - 1)).append(")");
         
         BoundSql boundSql = new BoundSql(sql.toString());
         boundSql.setInValue(inValues);

@@ -77,7 +77,7 @@ public class ETLTool {
      */
     private static void fullZip(final ETLMappingDomain domain) {
         String columns = ETLSqlProvider.getSourceColumns(domain);
-        String where = " endDate = \"9999-01-01\"";
+        String where = " end_date = \"9999-01-01\"";
 
         List<Map<String, Object>> bdmList =
                 SqlRunner.selectListMap(new BoundSql(ETLSqlProvider.select(columns, domain.getHistory().getBDMTable())));

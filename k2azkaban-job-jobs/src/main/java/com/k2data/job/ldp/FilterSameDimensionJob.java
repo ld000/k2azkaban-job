@@ -19,11 +19,6 @@ import java.util.Map;
  */
 public class FilterSameDimensionJob implements BaseJob {
 
-    public static void main(String[] args) throws Exception {
-        BaseJob job = JobProxyFactory.getJdkProxy(FilterSameDimensionJob.class);
-        job.run();
-    }
-
     @Override
     public void run() {
         Map<String, List<Map<String, Object>>> map = Maps.newHashMap();

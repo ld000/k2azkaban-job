@@ -10,11 +10,6 @@ import com.k2data.platform.persistence.transaction.TransactionUtils;
  */
 public class DivideNoGpsMachineJob implements BaseJob {
 
-    public static void main(String[] args) throws Exception {
-        BaseJob job = JobProxyFactory.getJdkProxy(DivideNoGpsMachineJob.class);
-        job.run();
-    }
-
     @Override
     public void run() {
         String updateGpsNoSql = "UPDATE lg_machineProfile b SET b.gpsNo = (SELECT a.gpsNo FROM lg_machineGpsContrast a WHERE a.deviceNo = b.deviceNo)";

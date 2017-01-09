@@ -8,12 +8,7 @@ import com.k2data.platform.etl.ETLTool;
 /**
  * @author lidong 12/1/16.
  */
-public class SupplyInChannetJob implements BaseJob {
-
-    public static void main(String[] args) throws Exception {
-        BaseJob job = JobProxyFactory.getJdkProxy(SupplyInChannetJob.class);
-        job.run();
-    }
+public class SupplyInChanNetJob implements BaseJob {
 
     @Override
     public void run() {

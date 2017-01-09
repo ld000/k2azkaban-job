@@ -14,11 +14,6 @@ import java.util.List;
  */
 public class GpsContrastKmxJob implements BaseJob {
 
-    public static void main(String[] args) {
-        GpsContrastKmxJob job = JobProxyFactory.getJdkProxy(GpsContrastKmxJob.class);
-        job.run();
-    }
-
     @Override
     public void run() {
         List<String> gpsNoList = SqlRunner.selectList(String.class,

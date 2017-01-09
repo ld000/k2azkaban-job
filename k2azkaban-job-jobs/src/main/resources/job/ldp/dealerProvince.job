@@ -1,6 +1,6 @@
-type=javaprocess
-java.class=com.k2data.job.ldp.ChanNetListJob
-classpath=../../k2azkaban-job-jobs-1.0.jar
-seconds=11
-fail=false
+type=javajar
+jar.path=../../k2azkaban-job-jobs-1.0.jar
+main.args=com.k2data.job.ldp.ChanNetListJob
+Xms=128m
+Xmx=128m
 dependencies=dealerInChanNetList

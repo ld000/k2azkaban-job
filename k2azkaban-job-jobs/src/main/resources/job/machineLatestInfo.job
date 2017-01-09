@@ -1,5 +1,5 @@
-type=javaprocess
-java.class=BaseJob
+type=javajar
+main.args=BaseJob
 classpath=../k2azkaban-job-jobs-1.0.jar
 seconds=11
 fail=false

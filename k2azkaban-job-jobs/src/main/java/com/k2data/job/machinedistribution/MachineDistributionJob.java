@@ -13,11 +13,6 @@ import java.util.Date;
  */
 public class MachineDistributionJob implements BaseJob {
 
-    public static void main(String[] args) {
-        MachineDistributionJob job = JobProxyFactory.getJdkProxy(MachineDistributionJob.class);
-        job.run();
-    }
-    
     @Override
     public void run() {
         Calendar calendar = CalendarUtils.getCalendar();

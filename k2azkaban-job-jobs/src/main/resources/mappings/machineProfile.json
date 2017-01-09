@@ -49,6 +49,7 @@
     {"source": "BUYOUTED", "target": "BUYOUTED"},
     {"source": "INVOICED", "target": "INVOICED"},
     {"source": "ISLG", "target": "ISLG"},
+    {"source": "ISDAIXIAOCHE", "target": "unsale"},
     {"source": "SOURCETYPE", "target": "SOURCETYPE", "constant": "1"}
   ],
   "deleteWhere": ["sourceType = 1"]

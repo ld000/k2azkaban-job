@@ -5,8 +5,8 @@
   "flagColumn": "FLAG",
   "history": {
     "type": "zipper",
-    "BDMTable": "bdm_ldp_productType",
-    "HisTable": "fdm_ldp_productType_his"
+    "BDMTable": "bdm_ldp_product_type",
+    "HisTable": "fdm_ldp_product_type_his"
   },
   "columnMappings": [
     {"source": "PROD_TYPE_ID", "target": "ID"},

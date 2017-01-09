@@ -9,11 +9,6 @@ import com.k2data.platform.persistence.SqlRunner;
  */
 public class UpdateTransHisDealerIdJob implements BaseJob {
 
-    public static void main(String[] args) throws Exception {
-        BaseJob job = JobProxyFactory.getJdkProxy(UpdateTransHisDealerIdJob.class);
-        job.run();
-    }
-
     @Override
     public void run() {
         String updateDealIdSql = "UPDATE lg_machineTransportHistory a" +

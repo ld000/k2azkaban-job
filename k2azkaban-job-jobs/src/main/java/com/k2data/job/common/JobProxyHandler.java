@@ -1,5 +1,10 @@
 package com.k2data.job.common;
 
+import org.apache.logging.log4j.core.config.ConfigurationSource;
+import org.apache.logging.log4j.core.config.Configurator;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
@@ -16,13 +21,23 @@ public class JobProxyHandler<T> implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        JobUtils.setRootPath(false);
-        JobClassLoader.loadJarPath(JobUtils.getRootPath() + "lib");
+        initLog4j();
 
+        Object result;
         try {
-            return method.invoke(proxyObj.newInstance(), args);
+            result = method.invoke(proxyObj.newInstance(), args);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
+    private void initLog4j() {
+        try {
+            Configurator.initialize(null, new ConfigurationSource(new FileInputStream(JobUtils.getRootPath() + "conf/log4j2.xml")));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

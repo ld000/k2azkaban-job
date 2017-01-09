@@ -17,11 +17,6 @@ import java.util.Objects;
  */
 public class MachineTypeJob implements BaseJob {
 
-    public static void main(String[] args) throws Exception {
-        BaseJob job = JobProxyFactory.getJdkProxy(MachineTypeJob.class);
-        job.run();
-    }
-
     @Override
     public void run() {
         ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/machineType.json", list -> {

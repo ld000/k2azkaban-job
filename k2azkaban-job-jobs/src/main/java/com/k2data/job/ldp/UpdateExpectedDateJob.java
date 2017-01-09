@@ -9,11 +9,6 @@ import com.k2data.platform.persistence.SqlRunner;
  */
 public class UpdateExpectedDateJob implements BaseJob {
 
-    public static void main(String[] args) throws Exception {
-        BaseJob job = JobProxyFactory.getJdkProxy(UpkeepHistoryJob.class);
-        job.run();
-    }
-
     @Override
     public void run() {
         String sql = "UPDATE lg_machineTransportHistory a" +

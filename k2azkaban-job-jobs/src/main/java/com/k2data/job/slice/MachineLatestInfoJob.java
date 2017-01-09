@@ -8,6 +8,7 @@ import com.k2data.job.common.JobProxyFactory;
 import com.k2data.job.slice.support.SliceSqlProvider;
 import com.k2data.platform.domain.MachineLatestInfo;
 import com.k2data.platform.kmx.KmxClient;
+import com.k2data.platform.kmx.KmxUtils;
 import com.k2data.platform.kmx.SensorNameEnum;
 import com.k2data.platform.kmx.cond.KmxDataPointsV3Cond;
 import com.k2data.platform.kmx.domain.KmxDataPointsDomain;
@@ -25,11 +26,6 @@ import java.util.Map;
  * @author lidong 17-1-4.
  */
 public class MachineLatestInfoJob implements BaseJob {
-
-    public static void main(String[] args) {
-        MachineLatestInfoJob job = JobProxyFactory.getJdkProxy(MachineLatestInfoJob.class);
-        job.run();
-    }
 
     @Override
     public void run() {
@@ -64,11 +60,11 @@ public class MachineLatestInfoJob implements BaseJob {
                 entity.setLongitude(StringUtils.toDouble(map.get(SensorNameEnum.LONGITUDE_NUM.getSensorName()).getValue()));
 
                 String address = String.valueOf(map.get(SensorNameEnum.ADDRESS.getSensorName()).getValue());
-                entity.setAddress(("-".equals(address) || "null".equals(address) || StringUtils.isBlank(address)) ? "" : address);
+                entity.setAddress(KmxUtils.safeString(address));
                 String province = String.valueOf(map.get(SensorNameEnum.PROVINCE.getSensorName()).getValue());
-                entity.setProvince(("-".equals(province) || "null".equals(province) || StringUtils.isBlank(province)) ? "" : province);
+                entity.setProvince(KmxUtils.safeString(province));
                 String city = String.valueOf(map.get(SensorNameEnum.CITY.getSensorName()).getValue());
-                entity.setCity(("-".equals(city) || "null".equals(city) || StringUtils.isBlank(city)) ? "" : city);
+                entity.setCity(KmxUtils.safeString(city));
                 entity.setPosition("");
                 entity.setSliceStop(new Date(map.get(SensorNameEnum.LATITUDE_NUM.getSensorName()).getTimestamp()));
 

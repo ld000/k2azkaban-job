@@ -48,7 +48,7 @@ public class ETLSqlProvider {
 
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO ").append(domain.getHistory().getHisTable().toUpperCase())
-          .append(" (").append(column).append(", beginDate, endDate").append(")")
+          .append(" (").append(column).append(", begin_date, end_date").append(")")
           .append(" SELECT ").append(column).append(", SYSDATE() AS \"beginDate\", \"9999-01-01\" AS \"endDate\" ")
           .append(" FROM ").append(domain.getHistory().getBDMTable().toUpperCase());
 
@@ -78,13 +78,26 @@ public class ETLSqlProvider {
 
         String id = domain.getColumnMappings().get(0).getSource().toUpperCase();
 
+        sql += "UPDATE " + domain.getHistory().getHisTable()
+                + " SET end_date = DATE_SUB(SYSDATE(), INTERVAL 1 DAY)"
+                + " WHERE " + id + " IN (";
+
         for (Map<String, Object> obj : data) {
-            sql += "UPDATE " + domain.getHistory().getHisTable()
-                    + " SET endDate = DATE_SUB(SYSDATE(), INTERVAL 1 DAY)"
-                    + " WHERE " + id + " = ?"
-                    + " AND endDate = \"9999-01-01\";";
+            sql += "?, ";
+
             inValues.add(obj.get(id));
         }
+        sql = sql.substring(0, sql.length() - 2);
+
+        sql += " ) AND end_date = \"9999-01-01\"";
+
+//        for (Map<String, Object> obj : data) {
+//            sql += "UPDATE " + domain.getHistory().getHisTable()
+//                    + " SET end_date = DATE_SUB(SYSDATE(), INTERVAL 1 DAY)"
+//                    + " WHERE " + id + " = ?"
+//                    + " AND end_date = \"9999-01-01\";";
+//            inValues.add(obj.get(id));
+//        }
 
         return new BoundSql(sql, inValues.toArray());
     }
@@ -105,7 +118,7 @@ public class ETLSqlProvider {
         }
 
         sb.append("INSERT INTO ").append(domain.getHistory().getHisTable().toUpperCase())
-                .append(" (").append(columns).append(", beginDate, endDate").append(")")
+                .append(" (").append(columns).append(", begin_date, end_date").append(")")
                 .append(" VALUES ");
 
         int i = 0;
@@ -154,13 +167,13 @@ public class ETLSqlProvider {
         // 闭链，旧有新没有
         sb.append("UPDATE ")
           .append(domain.getHistory().getHisTable().toUpperCase())
-          .append(" SET endDate = DATE_SUB(SYSDATE(), INTERVAL 1 DAY)")
+          .append(" SET end_date = DATE_SUB(SYSDATE(), INTERVAL 1 DAY)")
           .append(" WHERE ROW(").append(column).append(")")
           .append(" IN (")
           .append(" SELECT ").append(rColumn)
               .append(" FROM (")
                     .append("SELECT ").append(column).append(" FROM ").append(domain.getHistory().getHisTable().toUpperCase())
-                    .append(" WHERE endDate = \"9999-01-01\"")
+                    .append(" WHERE end_date = \"9999-01-01\"")
               .append(") r")
           .append(" WHERE ROW(").append(rColumn).append(")")
           .append(" NOT IN (SELECT ").append(column).append(" FROM ").append(domain.getHistory().getBDMTable().toUpperCase()).append(")")
@@ -170,13 +183,13 @@ public class ETLSqlProvider {
 
         // 开新链，新有旧没有
         sb.append("INSERT INTO ").append(domain.getHistory().getHisTable().toUpperCase())
-          .append(" (").append(column).append(", beginDate, endDate").append(")")
+          .append(" (").append(column).append(", begin_date, end_date").append(")")
           .append(" SELECT ").append(column).append(", SYSDATE() AS \"beginDate\", \"9999-01-01\" AS \"endDate\" ")
           .append(" FROM ").append(domain.getHistory().getBDMTable().toUpperCase())
           .append(" WHERE ROW(").append(column).append(")")
           .append(" NOT IN (")
           .append(" SELECT ").append(column).append(" FROM ").append(domain.getHistory().getHisTable().toUpperCase())
-          .append(" WHERE beginDate <= SYSDATE() AND endDate >= SYSDATE()")
+          .append(" WHERE begin_date <= SYSDATE() AND end_date >= SYSDATE()")
           .append(");")
         ;
 

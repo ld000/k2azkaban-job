@@ -23,11 +23,6 @@ import java.util.Map;
  */
 public class GpsContrastJob implements BaseJob {
 
-    public static void main(String[] args) {
-        GpsContrastJob job = JobProxyFactory.getJdkProxy(GpsContrastJob.class);
-        job.run();
-    }
-
     @Override
     public void run() {
         String token = NvrClient.getToken();

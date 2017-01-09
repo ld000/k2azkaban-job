@@ -1,6 +1,6 @@
-type=javaprocess
-java.class=com.k2data.job.ldp.MachineDimensionJob
-classpath=../../k2azkaban-job-jobs-1.0.jar
-seconds=11
-fail=false
+type=javajar
+jar.path=../../k2azkaban-job-jobs-1.0.jar
+main.args=com.k2data.job.ldp.MachineDimensionJob
+Xms=128m
+Xmx=128m
 dependencies=machineWorkState,faultClass,productType,repairHistory,machineTransHis,machineType,inspectionHistory,chanNetList,cityList,replaceHistory,customerList,supplyProvince,overdueMachine

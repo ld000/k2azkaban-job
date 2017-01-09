@@ -17,11 +17,6 @@ import java.util.Map;
  */
 public class MachineDimensionJob implements BaseJob {
 
-    public static void main(String[] args) throws Exception {
-        BaseJob job = JobProxyFactory.getJdkProxy(MachineDimensionJob.class);
-        job.run();
-    }
-
     @Override
     public void run() {
         List<MachineDimension> source = GeneralQueryService.queryMachineDimensionList(3);
