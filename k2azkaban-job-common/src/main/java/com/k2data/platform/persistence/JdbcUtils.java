@@ -1,7 +1,7 @@
 package com.k2data.platform.persistence;
 
 import com.k2data.platform.exception.InternalException;
-import org.apache.commons.beanutils.ConvertUtils;
+import com.k2data.platform.utils.ConvertUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +27,7 @@ public final class JdbcUtils {
             try {
                 conn.close();
             } catch(SQLException sqle) {
-                logger.debug("关闭Connection失败", sqle);
+                logger.warn("关闭Connection失败", sqle);
             }
         }
     }
@@ -42,7 +42,7 @@ public final class JdbcUtils {
             try {
                 rs.close();
             } catch (SQLException sqle) {
-                logger.debug("关闭ResultSet失败", sqle);
+                logger.warn("关闭ResultSet失败", sqle);
             }
         }
     }
@@ -57,7 +57,7 @@ public final class JdbcUtils {
             try {
                 stmt.close();
             } catch (SQLException sqle) {
-                logger.debug("关闭Statement失败", sqle);
+                logger.warn("关闭Statement失败", sqle);
             }
         }
     }
@@ -82,15 +82,12 @@ public final class JdbcUtils {
             for (int i = 0; i < inValues.size(); i++) {
                 Object inValue = inValues.get(i);
 
-
-
-
                 if (inValue != null && java.util.Date.class.isAssignableFrom(inValue.getClass())) {
-                    ps.setTimestamp(i + 1, (Timestamp) ConvertUtils.convert(inValue, Timestamp.class));
+                    ps.setTimestamp(i + 1, ConvertUtils.convert(inValue, Timestamp.class));
                 } else if (inValue != null && Clob.class.isAssignableFrom(inValue.getClass())) {
                     ps.setClob(i + 1, ((Clob)inValue).getCharacterStream());
                 } else if (inValue != null && Blob.class.isAssignableFrom(inValue.getClass())) {
-                    ps.setBytes(i + 1, (byte [])ConvertUtils.convert(inValue, byte [].class));
+                    ps.setBytes(i + 1, ConvertUtils.convert(inValue, byte [].class));
                 } else {
                     ps.setObject(i + 1, inValue);
                 }

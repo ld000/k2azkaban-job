@@ -3,7 +3,6 @@ package com.k2data.platform.kmx;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.k2data.platform.kmx.cond.KmxCond;
-import com.k2data.platform.kmx.cond.KmxDevicesListV2Cond;
 import com.k2data.platform.utils.Global;
 import com.k2data.platform.utils.OkhttpUtils;
 import com.k2data.platform.utils.StringUtils;
@@ -102,7 +101,7 @@ public class KmxClient {
      */
     @SuppressWarnings("unchecked")
     private static Object handleResponse(KmxCond cond, String url, Map<String, String> params, Response response, KmxResponseHandler handler) throws IOException {
-        if(!(cond instanceof KmxDevicesListV2Cond) && !response.isSuccessful())
+        if(!cond.isV2() && !response.isSuccessful())
             throw new KmxException("Kmx get error! code: " + response.code() + ", url: " + url + ", params: " + params);
 
         String responseStr = response.body().string();

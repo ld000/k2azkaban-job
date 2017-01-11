@@ -5,7 +5,7 @@ import com.k2data.platform.domain.MapCoord;
 import com.k2data.platform.kmx.KmxClient;
 import com.k2data.platform.kmx.KmxConvert;
 import com.k2data.platform.kmx.SensorNameEnum;
-import com.k2data.platform.kmx.cond.KmxDataRowsV3Cond;
+import com.k2data.platform.kmx.cond.KmxCond;
 import com.k2data.platform.kmx.domain.KmxDataRowsRspDomain;
 import com.k2data.platform.persistence.SqlRunner;
 import com.k2data.platform.utils.DateUtils;
@@ -37,12 +37,14 @@ public class SliceBaseDataService {
         Date start = DateUtils.parseDate(DateUtils.formatDate(recordTime) + " 00:00:00");
         Date stop = DateUtils.parseDate(DateUtils.formatDate(recordTime) + " 23:59:59");
 
-        KmxDataRowsV3Cond cond = new KmxDataRowsV3Cond();
-        cond.setDeviceNo(deviceNo);
-        cond.setSensors(dateSensors);
-        cond.setStart(start);
-        cond.setStop(stop);
-        cond.setSize(""+ KmxClient.PAGE_SIZE);
+        KmxCond cond = KmxCond.dataRowsV3()
+                .device(deviceNo)
+                .sensors(dateSensors)
+                .start(start)
+                .stop(stop)
+                .size(KmxClient.PAGE_SIZE)
+                .build();
+
         KmxClient.getAsync(cond, rsp -> {
 
             List<LgDeviceSliceStatics> dateList = analysisSliceData(KmxConvert.objectToList((KmxDataRowsRspDomain) rsp), deviceNo);
@@ -62,12 +64,14 @@ public class SliceBaseDataService {
     }
 
     public void saveSyncDeviceSliceData(final String deviceNo, Date start, Date stop){
-        KmxDataRowsV3Cond cond = new KmxDataRowsV3Cond();
-        cond.setDeviceNo(deviceNo);
-        cond.setSensors(dateSensors);
-        cond.setStart(start);
-        cond.setStop(stop);
-        cond.setSize(""+ KmxClient.PAGE_SIZE);
+        KmxCond cond = KmxCond.dataRowsV3()
+                .device(deviceNo)
+                .sensors(dateSensors)
+                .start(start)
+                .stop(stop)
+                .size(KmxClient.PAGE_SIZE)
+                .build();
+
         KmxDataRowsRspDomain rsp = KmxClient.getSync(cond);
 
         if (rsp != null) {

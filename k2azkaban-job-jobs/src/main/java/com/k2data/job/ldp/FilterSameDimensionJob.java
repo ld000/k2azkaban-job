@@ -20,7 +20,7 @@ import java.util.Map;
 public class FilterSameDimensionJob implements BaseJob {
 
     @Override
-    public void run() {
+    public long run() {
         Map<String, List<Map<String, Object>>> map = Maps.newHashMap();
         String sameDataSql = "SELECT a.dimensionName, a.dimensionType" +
                 " FROM lg_machineDimension a" +
@@ -86,6 +86,8 @@ public class FilterSameDimensionJob implements BaseJob {
                     throw new RuntimeException("type没配置!!! type=" + entry.getKey());
             }
         }
+
+        return 0;
     }
 
     private BoundSql getFilterType1Sql(String source, List<String> list) {

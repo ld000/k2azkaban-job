@@ -1,4 +1,4 @@
-package com.k2data.job.common.mapper;
+package com.k2data.platform.general;
 
 import com.k2data.platform.persistence.support.BoundSql;
 

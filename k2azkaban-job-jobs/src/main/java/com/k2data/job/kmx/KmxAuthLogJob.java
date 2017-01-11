@@ -9,8 +9,10 @@ import com.k2data.job.common.JobProxyFactory;
 public class KmxAuthLogJob implements BaseJob {
 
     @Override
-    public void run() {
+    public long run() {
 
+
+        return 0;
     }
 
 }

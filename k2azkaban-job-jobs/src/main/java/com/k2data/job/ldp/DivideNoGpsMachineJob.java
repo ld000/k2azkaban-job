@@ -2,6 +2,7 @@ package com.k2data.job.ldp;
 
 import com.k2data.job.common.BaseJob;
 import com.k2data.job.common.JobProxyFactory;
+import com.k2data.platform.annotation.Influx;
 import com.k2data.platform.persistence.SqlRunner;
 import com.k2data.platform.persistence.transaction.TransactionUtils;
 
@@ -11,7 +12,7 @@ import com.k2data.platform.persistence.transaction.TransactionUtils;
 public class DivideNoGpsMachineJob implements BaseJob {
 
     @Override
-    public void run() {
+    public long run() {
         String updateGpsNoSql = "UPDATE lg_machineProfile b SET b.gpsNo = (SELECT a.gpsNo FROM lg_machineGpsContrast a WHERE a.deviceNo = b.deviceNo)";
 
         String deleteNoGpsTableSql = "DELETE FROM lg_machineProfileNoGps";
@@ -111,6 +112,8 @@ public class DivideNoGpsMachineJob implements BaseJob {
         } finally {
             TransactionUtils.closeConnection();
         }
+
+        return 0;
     }
 
 }

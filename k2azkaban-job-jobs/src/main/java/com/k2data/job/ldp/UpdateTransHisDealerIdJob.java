@@ -10,7 +10,7 @@ import com.k2data.platform.persistence.SqlRunner;
 public class UpdateTransHisDealerIdJob implements BaseJob {
 
     @Override
-    public void run() {
+    public long run() {
         String updateDealIdSql = "UPDATE lg_machineTransportHistory a" +
                 "        SET a.dealerId = (" +
                 "            SELECT b.id" +
@@ -18,7 +18,7 @@ public class UpdateTransHisDealerIdJob implements BaseJob {
                 "            WHERE a.chanNetId = b.chanNetId" +
                 "            AND a.supplyId = b.supplyId" +
                 "        )";
-        SqlRunner.update(updateDealIdSql);
+        return SqlRunner.update(updateDealIdSql);
     }
     
 }

@@ -3,16 +3,50 @@ package com.k2data.platform.kmx.cond;
 import java.util.Map;
 
 /**
- * KMX 查询条件抽象类
- *
- * @author lidong 11/22/16.
+ * @author lidong 17-1-10.
  */
-public abstract class KmxCond {
+public class KmxCond {
 
-    public abstract Class getClazz();
+    private String url;
+    private Map<String, String> params;
+    private Class<?> clazz;
+    private Boolean v2;
 
-    public abstract String getUrl();
+    public static KmxDataPointsV3Builder dataPointsV3() {
+        return new KmxDataPointsV3Builder();
+    }
 
-    public abstract Map<String, String> getParams();
+    public static KmxDataRowsV3Builder dataRowsV3() {
+        return new KmxDataRowsV3Builder();
+    }
+
+    public static KmxDevicesListV2Builder devicesListV2() {
+        return new KmxDevicesListV2Builder();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    public Map<String, String> getParams() {
+        return params;
+    }
+    public void setParams(Map<String, String> params) {
+        this.params = params;
+    }
+    public Class<?> getClazz() {
+        return clazz;
+    }
+    public void setClazz(Class<?> clazz) {
+        this.clazz = clazz;
+    }
+    public Boolean isV2() {
+        return v2;
+    }
+    public void setV2(Boolean v2) {
+        this.v2 = v2;
+    }
 
 }

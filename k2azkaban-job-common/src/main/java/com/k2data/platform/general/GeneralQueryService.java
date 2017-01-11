@@ -1,6 +1,6 @@
-package com.k2data.job.common;
+package com.k2data.platform.general;
 
-import com.k2data.job.common.mapper.GeneralQuerySqlProvider;
+import com.k2data.platform.general.GeneralQuerySqlProvider;
 import com.k2data.platform.domain.MachineDimension;
 import com.k2data.platform.persistence.SqlRunner;
 

@@ -2,8 +2,8 @@ package com.k2data.job.ldp;
 
 import com.google.common.collect.Lists;
 import com.k2data.job.common.BaseJob;
-import com.k2data.job.common.GeneralQueryService;
-import com.k2data.job.common.JobProxyFactory;
+import com.k2data.platform.annotation.Influx;
+import com.k2data.platform.general.GeneralQueryService;
 import com.k2data.job.common.JobUtils;
 import com.k2data.platform.etl.ETLTool;
 import org.apache.commons.lang3.StringUtils;
@@ -17,13 +17,14 @@ import java.util.Objects;
 /**
  * @author lidong 16-11-11.
  */
+@Influx(measurement = "job_log", tag = {"from:ldp", "type:chan_net_list"})
 public class ChanNetListJob implements BaseJob {
 
     private static Logger logger = LogManager.getLogger(ChanNetListJob.class);
 
     @Override
-    public void run() {
-        ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/chanNetList.json", list -> {
+    public long run() {
+        return ETLTool.pullLDPData(JobUtils.getRootPath() + "mappings/chanNetList.json", list -> {
             List<Map<String, Object>> result = Lists.newArrayList();
             for (Map<String, Object> objMap : list) {
                 if (handleMachineType(objMap)) {

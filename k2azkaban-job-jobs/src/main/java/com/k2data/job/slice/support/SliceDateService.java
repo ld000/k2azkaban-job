@@ -1,5 +1,7 @@
 package com.k2data.job.slice.support;
 
+import com.k2data.platform.kmx.cond.KmxCond;
+import com.k2data.platform.utils.Global;
 import com.k2data.platform.domain.LgDeviceDateStatics;
 import com.k2data.platform.domain.LgDeviceStatics;
 import com.k2data.platform.domain.MapCoord;
@@ -8,7 +10,6 @@ import com.k2data.platform.kmx.KmxClient;
 import com.k2data.platform.kmx.KmxConvert;
 import com.k2data.platform.kmx.KmxResponseHandler;
 import com.k2data.platform.kmx.SensorNameEnum;
-import com.k2data.platform.kmx.cond.KmxDataRowsV3Cond;
 import com.k2data.platform.kmx.domain.KmxDataRowsRspDomain;
 import com.k2data.platform.persistence.SqlRunner;
 import com.k2data.platform.persistence.support.BoundSqlBuilder;
@@ -44,12 +45,14 @@ public class SliceDateService {
         Date start = DateUtils.parseDate(DateUtils.formatDate(recordTime) + " 00:00:00");
         Date stop = DateUtils.parseDate(DateUtils.formatDate(recordTime) + " 23:59:59");
 
-        KmxDataRowsV3Cond cond = new KmxDataRowsV3Cond();
-        cond.setDeviceNo(deviceNo);
-        cond.setSensors(dateSensors);
-        cond.setStart(start);
-        cond.setStop(stop);
-        cond.setSize(""+ KmxClient.PAGE_SIZE);
+        KmxCond cond = KmxCond.dataRowsV3()
+                .device(deviceNo)
+                .sensors(dateSensors)
+                .start(start)
+                .stop(stop)
+                .size(KmxClient.PAGE_SIZE)
+                .build();
+
         KmxClient.getAsync(cond, new KmxResponseHandler<KmxDataRowsRspDomain>() {
             @Override
             public void handleResponse(KmxDataRowsRspDomain rsp) {
@@ -87,12 +90,14 @@ public class SliceDateService {
         Date start = DateUtils.parseDate(DateUtils.formatDate(recordTime) + " 00:00:00");
         Date stop = DateUtils.parseDate(DateUtils.formatDate(recordTime) + " 23:59:59");
 
-        KmxDataRowsV3Cond cond = new KmxDataRowsV3Cond();
-        cond.setDeviceNo(deviceNo);
-        cond.setSensors(dateSensors);
-        cond.setStart(start);
-        cond.setStop(stop);
-        cond.setSize(""+ KmxClient.PAGE_SIZE);
+        KmxCond cond = KmxCond.dataRowsV3()
+                .device(deviceNo)
+                .sensors(dateSensors)
+                .start(start)
+                .stop(stop)
+                .size(KmxClient.PAGE_SIZE)
+                .build();
+
         KmxDataRowsRspDomain rsp = KmxClient.getSync(cond);
 
         if (rsp != null) {

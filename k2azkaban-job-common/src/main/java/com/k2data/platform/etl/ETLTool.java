@@ -24,20 +24,20 @@ public class ETLTool {
     /**
      * 同步 LDP 数据
      */
-    public static void pullLDPData(String mappingFileName) {
-        pullLDPData(mappingFileName, null);
+    public static long pullLDPData(String mappingFileName) {
+        return pullLDPData(mappingFileName, null);
     }
 
     /**
      * 同步 LDP 数据
      */
-    public static void pullLDPData(String mappingFileName, final ETLDataPreHandler handler) {
+    public static long pullLDPData(String mappingFileName, final ETLDataPreHandler handler) {
         final ETLMappingDomain domain = resolveMappingFile(mappingFileName);
 
         List<Map<String, Object>> source = extraction(domain);
 
         if (source.size() == 0)
-            return;
+            return 0;
 
         cache(domain, source);
 
@@ -70,6 +70,8 @@ public class ETLTool {
         } finally {
             TransactionUtils.closeConnection();
         }
+
+        return source.size();
     }
 
     /**

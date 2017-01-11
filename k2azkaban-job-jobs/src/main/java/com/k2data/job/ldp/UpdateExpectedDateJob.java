@@ -10,7 +10,7 @@ import com.k2data.platform.persistence.SqlRunner;
 public class UpdateExpectedDateJob implements BaseJob {
 
     @Override
-    public void run() {
+    public long run() {
         String sql = "UPDATE lg_machineTransportHistory a" +
                 "        SET a.expectedDeliveryDate = (" +
                 "            SELECT DATE_ADD(b.transportDate,INTERVAL t.datelimit day)" +
@@ -20,7 +20,7 @@ public class UpdateExpectedDateJob implements BaseJob {
                 "               AND t.datelimit <> 0" +
                 "        )";
 
-        SqlRunner.update(sql);
+        return SqlRunner.update(sql);
     }
 
 }

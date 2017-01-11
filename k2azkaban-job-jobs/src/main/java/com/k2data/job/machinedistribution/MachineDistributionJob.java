@@ -14,7 +14,7 @@ import java.util.Date;
 public class MachineDistributionJob implements BaseJob {
 
     @Override
-    public void run() {
+    public long run() {
         Calendar calendar = CalendarUtils.getCalendar();
         calendar.setTime(new Date());
         calendar.add(Calendar.MONTH, -1);
@@ -50,7 +50,7 @@ public class MachineDistributionJob implements BaseJob {
                 "        where a.workMonthId = ? " +
                 "        GROUP BY a.workMonthId, b.machineType, b.modelnumber, b.orderNumber, a.province, a.city";
 
-        SqlRunner.insert(sql, workMonthId);
+        return SqlRunner.insert(sql, workMonthId);
     }
     
 }

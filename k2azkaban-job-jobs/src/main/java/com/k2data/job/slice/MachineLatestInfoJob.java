@@ -3,14 +3,13 @@ package com.k2data.job.slice;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.k2data.job.common.BaseJob;
-import com.k2data.job.common.GeneralQueryService;
-import com.k2data.job.common.JobProxyFactory;
+import com.k2data.platform.general.GeneralQueryService;
 import com.k2data.job.slice.support.SliceSqlProvider;
 import com.k2data.platform.domain.MachineLatestInfo;
 import com.k2data.platform.kmx.KmxClient;
 import com.k2data.platform.kmx.KmxUtils;
 import com.k2data.platform.kmx.SensorNameEnum;
-import com.k2data.platform.kmx.cond.KmxDataPointsV3Cond;
+import com.k2data.platform.kmx.cond.KmxCond;
 import com.k2data.platform.kmx.domain.KmxDataPointsDomain;
 import com.k2data.platform.kmx.domain.KmxDataPointsRspDomain;
 import com.k2data.platform.persistence.SqlRunner;
@@ -28,7 +27,7 @@ import java.util.Map;
 public class MachineLatestInfoJob implements BaseJob {
 
     @Override
-    public void run() {
+    public long run() {
         List<String> sensors = Lists.newArrayList();
         sensors.add(SensorNameEnum.LATITUDE_NUM.getSensorName());
         sensors.add(SensorNameEnum.LONGITUDE_NUM.getSensorName());
@@ -39,11 +38,12 @@ public class MachineLatestInfoJob implements BaseJob {
         List<String> gpsNoList = GeneralQueryService.queryGpsNo();
 
         for (String gpsNo : gpsNoList) {
-            KmxDataPointsV3Cond cond = new KmxDataPointsV3Cond();
-            cond.setDevice(gpsNo);
-            cond.setSensor(sensors);
-            cond.setShiftType(KmxDataPointsV3Cond.ShiftType.BEFORE);
-            cond.setTimestamp(new Date().getTime());
+            KmxCond cond = KmxCond.dataPointsV3()
+                    .device(gpsNo)
+                    .sensors(sensors)
+                    .before()
+                    .timestamp(new Date().getTime())
+                    .build();
 
             KmxDataPointsRspDomain domain = KmxClient.getSync(cond);
 
@@ -73,6 +73,8 @@ public class MachineLatestInfoJob implements BaseJob {
                 }
             }
         }
+
+        return gpsNoList.size();
     }
 
 }

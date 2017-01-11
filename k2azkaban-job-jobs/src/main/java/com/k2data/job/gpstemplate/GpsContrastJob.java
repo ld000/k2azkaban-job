@@ -2,7 +2,7 @@ package com.k2data.job.gpstemplate;
 
 import com.alibaba.fastjson.JSON;
 import com.k2data.job.common.BaseJob;
-import com.k2data.job.common.JobProxyFactory;
+import com.k2data.platform.annotation.Influx;
 import com.k2data.platform.domain.LgMachineGpsContrast;
 import com.k2data.platform.nvr.NvrClient;
 import com.k2data.platform.nvr.domain.NvrMachineContrast;
@@ -21,10 +21,11 @@ import java.util.Map;
 /**
  * @author lidong 17-1-4.
  */
+@Influx(measurement = "job_log", tag = {"from:nvr", "type:gps_contrast"})
 public class GpsContrastJob implements BaseJob {
 
     @Override
-    public void run() {
+    public long run() {
         String token = NvrClient.getToken();
         Map<String,String> headers = new HashMap<String,String>();
         headers.put("token", token);
@@ -61,6 +62,8 @@ public class GpsContrastJob implements BaseJob {
         } finally {
             TransactionUtils.closeConnection();
         }
+
+        return content.size();
     }
 
 }
