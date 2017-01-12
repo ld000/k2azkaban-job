@@ -1,0 +1,2 @@
+type=command
+command=sh ../run.sh com.k2data.job.gpstemplate.GpsContrastJob

@@ -10,7 +10,7 @@ public class MainClass {
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         JobUtils.setRootPath(false);
-        JobClassLoader.loadJarPath(JobUtils.getRootPath() + "lib");
+        JobClassLoader.loadDirInnerJar(JobUtils.getRootPath() + "lib");
 
         Class<? extends BaseJob> clazz;
         try {

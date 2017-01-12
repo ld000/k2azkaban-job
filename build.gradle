@@ -19,7 +19,6 @@ allprojects {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
         options.encoding = 'UTF-8'
-        options.compilerArgs += "-parameters"
     }
 
     ext {
@@ -99,6 +98,10 @@ task packageZip(type: Zip, dependsOn: build) {
 //        rename('k2data.production.properties', 'k2data.properties')
     }
     from('k2azkaban-job-jobs/build/libs') {
+        into('/')
+    }
+    from('k2azkaban-job-jobs') {
+        include("run.sh")
         into('/')
     }
 }

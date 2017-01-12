@@ -31,15 +31,15 @@ public class JobProxyHandler<T> implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         initLog4j();
 
-        Object result;
+        Object result = 0;
         try {
             result = method.invoke(proxyClazz.newInstance(), args);
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
-
-        if (proxyClazz.isAnnotationPresent(Influx.class)) {
-            insertInflux(Long.valueOf(result.toString()), proxyClazz.getAnnotation(Influx.class));
+        } finally {
+            if (proxyClazz.isAnnotationPresent(Influx.class)) {
+                insertInflux(Long.valueOf(result.toString()), proxyClazz.getAnnotation(Influx.class));
+            }
         }
 
         return result;
